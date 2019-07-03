@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BusDB.dbo.Lines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Lines">
+    <Key>
+      <PropertyRef Name="LineID" />
+      <PropertyRef Name="StationID" />
+      <PropertyRef Name="StationNr" />
+    </Key>
+    <Property Name="LineID" Type="int" Nullable="false" />
+    <Property Name="StationID" Type="int" Nullable="false" />
+    <Property Name="StationNr" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stations">
+    <Key>
+      <PropertyRef Name="StationID" />
+    </Key>
+    <Property Name="StationID" Type="int" Nullable="false" />
+    <Property Name="StationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Lines_Stations">
+    <End Role="Stations" Type="Self.Stations" Multiplicity="1" />
+    <End Role="Lines" Type="Self.Lines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stations">
+        <PropertyRef Name="StationID" />
+      </Principal>
+      <Dependent Role="Lines">
+        <PropertyRef Name="StationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BusDBModelStoreContainer">
+    <EntitySet Name="Stations" EntityType="Self.Stations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lines" EntityType="Self.Lines" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Lines].[LineID] AS [LineID], 
+    [Lines].[StationID] AS [StationID], 
+    [Lines].[StationNr] AS [StationNr]
+    FROM [dbo].[Lines] AS [Lines]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Lines_Stations" Association="Self.FK_Lines_Stations">
+      <End Role="Stations" EntitySet="Stations" />
+      <End Role="Lines" EntitySet="Lines" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

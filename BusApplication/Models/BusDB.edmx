@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusId" />
+          </Key>
+          <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Actual_Longitude" Type="float" Nullable="false" />
+          <Property Name="Actual_Latitude" Type="float" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="BusName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BusTrace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="LineID" Type="int" Nullable="false" />
+          <Property Name="StationID" Type="int" Nullable="false" />
+          <Property Name="StationNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="StationID" />
+          </Key>
+          <Property Name="StationID" Type="int" Nullable="false" />
+          <Property Name="StationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Line_Station">
+          <End Role="Station" Type="Self.Station" Multiplicity="1" />
+          <End Role="Line" Type="Self.Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="Line">
+              <PropertyRef Name="StationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BusDBModelStoreContainer">
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusTrace" EntityType="Self.BusTrace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Line" EntityType="Self.Line" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Station" EntityType="Self.Station" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Line_Station" Association="Self.FK_Line_Station">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Line" EntitySet="Line" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BusDBEntities9" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Buses" EntityType="BusDBModel.Bus" />
+          <EntitySet Name="BusTraces" EntityType="BusDBModel.BusTrace" />
+          <EntitySet Name="Lines" EntityType="BusDBModel.Line" />
+          <EntitySet Name="Stations" EntityType="BusDBModel.Station" />
+          <AssociationSet Name="FK_Line_Station" Association="BusDBModel.FK_Line_Station">
+            <End Role="Station" EntitySet="Stations" />
+            <End Role="Line" EntitySet="Lines" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusId" />
+          </Key>
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Actual_Longitude" Type="Double" Nullable="false" />
+          <Property Name="Actual_Latitude" Type="Double" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BusTrace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="LineID" Type="Int32" Nullable="false" />
+          <Property Name="StationID" Type="Int32" Nullable="false" />
+          <Property Name="StationNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Station" Relationship="BusDBModel.FK_Line_Station" FromRole="Line" ToRole="Station" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="StationID" />
+          </Key>
+          <Property Name="StationID" Type="Int32" Nullable="false" />
+          <Property Name="StationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Lines" Relationship="BusDBModel.FK_Line_Station" FromRole="Station" ToRole="Line" />
+        </EntityType>
+        <Association Name="FK_Line_Station">
+          <End Type="BusDBModel.Station" Role="Station" Multiplicity="1" />
+          <End Type="BusDBModel.Line" Role="Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="Line">
+              <PropertyRef Name="StationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BusDBModelStoreContainer" CdmEntityContainer="BusDBEntities9">
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="BusDBModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="BusName" ColumnName="BusName" />
+                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+                <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
+                <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusTraces">
+            <EntityTypeMapping TypeName="BusDBModel.BusTrace">
+              <MappingFragment StoreEntitySet="BusTrace">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lines">
+            <EntityTypeMapping TypeName="BusDBModel.Line">
+              <MappingFragment StoreEntitySet="Line">
+                <ScalarProperty Name="StationNr" ColumnName="StationNr" />
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stations">
+            <EntityTypeMapping TypeName="BusDBModel.Station">
+              <MappingFragment StoreEntitySet="Station">
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="StationName" ColumnName="StationName" />
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Line">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="LineID" Type="Int32" Nullable="false" />
+    <Property Name="StationID" Type="Int32" Nullable="false" />
+    <Property Name="StationNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Station" Relationship="Self.FK_Line_Station" FromRole="Line" ToRole="Station" />
+  </EntityType>
+  <EntityType Name="Station">
+    <Key>
+      <PropertyRef Name="StationID" />
+    </Key>
+    <Property Name="StationID" Type="Int32" Nullable="false" />
+    <Property Name="StationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Lines" Relationship="Self.FK_Line_Station" FromRole="Station" ToRole="Line" />
+  </EntityType>
+  <Association Name="FK_Line_Station">
+    <End Role="Station" Type="Self.Station" Multiplicity="1" />
+    <End Role="Line" Type="Self.Line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Station">
+        <PropertyRef Name="StationID" />
+      </Principal>
+      <Dependent Role="Line">
+        <PropertyRef Name="StationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BusDBEntities9" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Lines" EntityType="Self.Line" />
+    <EntitySet Name="Stations" EntityType="Self.Station" />
+    <AssociationSet Name="FK_Line_Station" Association="Self.FK_Line_Station">
+      <End Role="Station" EntitySet="Stations" />
+      <End Role="Line" EntitySet="Lines" />
+    </AssociationSet>
+    <EntitySet Name="Buses" EntityType="BusDBModel.Bus" />
+    <EntitySet Name="BusTraces" EntityType="BusDBModel.BusTrace" />
+  </EntityContainer>
+  <EntityType Name="Bus">
+    <Key>
+      <PropertyRef Name="BusId" />
+    </Key>
+    <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Actual_Longitude" Type="Double" Nullable="false" />
+    <Property Name="Actual_Latitude" Type="Double" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BusTrace">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+</Schema>

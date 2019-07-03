@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Station">
+    <Key>
+      <PropertyRef Name="StationID" />
+    </Key>
+    <Property Name="StationID" Type="Int32" Nullable="false" />
+    <Property Name="StationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Lines" Relationship="Self.FK_Lines_Stations" FromRole="Stations" ToRole="Lines" />
+  </EntityType>
+  <EntityType Name="Line">
+    <Key>
+      <PropertyRef Name="LineID" />
+      <PropertyRef Name="StationID" />
+      <PropertyRef Name="StationNr" />
+    </Key>
+    <Property Name="LineID" Type="Int32" Nullable="false" />
+    <Property Name="StationID" Type="Int32" Nullable="false" />
+    <Property Name="StationNr" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Station" Relationship="Self.FK_Lines_Stations" FromRole="Lines" ToRole="Stations" />
+  </EntityType>
+  <Association Name="FK_Lines_Stations">
+    <End Role="Stations" Type="Self.Station" Multiplicity="1" />
+    <End Role="Lines" Type="Self.Line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stations">
+        <PropertyRef Name="StationID" />
+      </Principal>
+      <Dependent Role="Lines">
+        <PropertyRef Name="StationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BusDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Stations" EntityType="Self.Station" />
+    <EntitySet Name="Lines" EntityType="Self.Line" />
+    <AssociationSet Name="FK_Lines_Stations" Association="Self.FK_Lines_Stations">
+      <End Role="Stations" EntitySet="Stations" />
+      <End Role="Lines" EntitySet="Lines" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

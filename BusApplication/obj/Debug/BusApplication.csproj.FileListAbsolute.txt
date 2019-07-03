@@ -1,0 +1,420 @@
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\BusApplication.dll.config
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\BusApplication.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\BusApplication.pdb
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\csc.exe
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\csc.exe.config
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\csc.rsp
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\csi.exe
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\csi.exe.config
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\csi.rsp
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.AppContext.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Console.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.IO.Compression.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Security.Claims.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.ValueTuple.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\vbc.exe
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\vbc.exe.config
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\vbc.rsp
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Antlr3.Runtime.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\EntityFramework.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Newtonsoft.Json.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Helpers.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Mvc.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Optimization.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Razor.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.WebPages.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\WebGrease.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\EntityFramework.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Helpers.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Mvc.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Optimization.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.Razor.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.WebPages.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Newtonsoft.Json.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Antlr3.Runtime.pdb
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CoreCompileInputs.cache
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CopyComplete
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\obj\Debug\BusApplication.dll
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\obj\Debug\BusApplication.pdb
+C:\Users\Kis Szilvia\Desktop\BusApplication\BusApplication\obj\Debug\BusApplication.csprojAssemblyReference.cache
+F:\GÉP\BusApplication\BusApplication\bin\BusApplication.dll.config
+F:\GÉP\BusApplication\BusApplication\bin\BusApplication.dll
+F:\GÉP\BusApplication\BusApplication\bin\BusApplication.pdb
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\csc.exe
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\csc.exe.config
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\csc.rsp
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\csi.exe
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\csi.exe.config
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\csi.rsp
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.CSharp.Core.targets
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.Managed.Core.targets
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.AppContext.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Collections.Immutable.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Console.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.StackTrace.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.IO.Compression.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.Primitives.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.AccessControl.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Reflection.Metadata.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Security.AccessControl.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Security.Claims.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Encoding.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Primitives.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Security.Principal.Windows.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Text.Encoding.CodePages.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.ValueTuple.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Xml.ReaderWriter.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Xml.XmlDocument.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.XDocument.dll
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\vbc.exe
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\vbc.exe.config
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\vbc.rsp
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe
+F:\GÉP\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe.config
+F:\GÉP\BusApplication\BusApplication\bin\Antlr3.Runtime.dll
+F:\GÉP\BusApplication\BusApplication\bin\EntityFramework.dll
+F:\GÉP\BusApplication\BusApplication\bin\EntityFramework.SqlServer.dll
+F:\GÉP\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+F:\GÉP\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\GÉP\BusApplication\BusApplication\bin\Microsoft.Web.Infrastructure.dll
+F:\GÉP\BusApplication\BusApplication\bin\Newtonsoft.Json.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Helpers.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Mvc.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Optimization.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Razor.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.WebPages.dll
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.dll
+F:\GÉP\BusApplication\BusApplication\bin\WebGrease.dll
+F:\GÉP\BusApplication\BusApplication\bin\EntityFramework.xml
+F:\GÉP\BusApplication\BusApplication\bin\EntityFramework.SqlServer.xml
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Helpers.xml
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Mvc.xml
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Optimization.xml
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.Razor.xml
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.WebPages.xml
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.xml
+F:\GÉP\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.xml
+F:\GÉP\BusApplication\BusApplication\bin\Newtonsoft.Json.xml
+F:\GÉP\BusApplication\BusApplication\bin\Antlr3.Runtime.pdb
+F:\GÉP\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.xml
+F:\GÉP\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+F:\GÉP\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\GÉP\BusApplication\BusApplication\obj\Debug\BusApplication.csprojAssemblyReference.cache
+F:\GÉP\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CoreCompileInputs.cache
+F:\GÉP\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CopyComplete
+F:\GÉP\BusApplication\BusApplication\obj\Debug\BusApplication.dll
+F:\GÉP\BusApplication\BusApplication\obj\Debug\BusApplication.pdb
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\BusApplication.dll.config
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\BusApplication.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\BusApplication.pdb
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\csc.exe
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\csc.exe.config
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\csc.rsp
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\csi.exe
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\csi.exe.config
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\csi.rsp
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.AppContext.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Console.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.IO.Compression.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Security.Claims.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.ValueTuple.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\vbc.exe
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\vbc.exe.config
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\vbc.rsp
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Antlr3.Runtime.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\EntityFramework.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Newtonsoft.Json.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Helpers.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Mvc.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Optimization.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Razor.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.WebPages.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\WebGrease.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\EntityFramework.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Helpers.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Mvc.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Optimization.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.Razor.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.WebPages.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Newtonsoft.Json.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Antlr3.Runtime.pdb
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\obj\Debug\BusApplication.csprojAssemblyReference.cache
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CoreCompileInputs.cache
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CopyComplete
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\obj\Debug\BusApplication.dll
+C:\Users\szilv\OneDrive\Asztali gép\BusApplication\BusApplication\obj\Debug\BusApplication.pdb
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\BusApplication.dll.config
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\BusApplication.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\BusApplication.pdb
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\csc.exe
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\csc.exe.config
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\csc.rsp
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\csi.exe
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\csi.exe.config
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\csi.rsp
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.AppContext.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Console.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.IO.Compression.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Security.Claims.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.ValueTuple.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\vbc.exe
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\vbc.exe.config
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\vbc.rsp
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Antlr3.Runtime.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\EntityFramework.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Newtonsoft.Json.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Helpers.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Mvc.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Optimization.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Razor.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.WebPages.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\WebGrease.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\EntityFramework.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Helpers.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Mvc.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Optimization.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.Razor.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.WebPages.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Newtonsoft.Json.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Antlr3.Runtime.pdb
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\cosmac\Documents\BusApplication\BusApplication\obj\Debug\BusApplication.csprojAssemblyReference.cache
+C:\Users\cosmac\Documents\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CoreCompileInputs.cache
+C:\Users\cosmac\Documents\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CopyComplete
+C:\Users\cosmac\Documents\BusApplication\BusApplication\obj\Debug\BusApplication.dll
+C:\Users\cosmac\Documents\BusApplication\BusApplication\obj\Debug\BusApplication.pdb
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\BusApplication.dll.config
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\BusApplication.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\BusApplication.pdb
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\csc.exe
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\csc.exe.config
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\csc.rsp
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\csi.exe
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\csi.exe.config
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\csi.rsp
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.AppContext.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Collections.Immutable.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Console.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.IO.Compression.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.IO.Pipes.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Reflection.Metadata.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Security.AccessControl.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Security.Claims.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Security.Principal.Windows.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.ValueTuple.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\vbc.exe
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\vbc.exe.config
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\vbc.rsp
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\roslyn\VBCSCompiler.exe.config
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Antlr3.Runtime.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\EntityFramework.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\EntityFramework.SqlServer.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Microsoft.Web.Infrastructure.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Newtonsoft.Json.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Helpers.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Mvc.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Optimization.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Razor.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.WebPages.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\WebGrease.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\EntityFramework.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\EntityFramework.SqlServer.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Helpers.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Mvc.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Optimization.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.Razor.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.WebPages.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.WebPages.Deployment.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Web.WebPages.Razor.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Newtonsoft.Json.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Antlr3.Runtime.pdb
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\System.Diagnostics.DiagnosticSource.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Programok\ASP.NET\BusApplication\BusApplication\obj\Debug\BusApplication.csprojAssemblyReference.cache
+D:\Programok\ASP.NET\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CoreCompileInputs.cache
+D:\Programok\ASP.NET\BusApplication\BusApplication\obj\Debug\BusApplication.csproj.CopyComplete
+D:\Programok\ASP.NET\BusApplication\BusApplication\obj\Debug\BusApplication.dll
+D:\Programok\ASP.NET\BusApplication\BusApplication\obj\Debug\BusApplication.pdb
