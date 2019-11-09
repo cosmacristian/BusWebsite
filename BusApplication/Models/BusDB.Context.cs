@@ -13,10 +13,10 @@ namespace BusApplication.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BusDBEntities9 : DbContext
+    public partial class BusDBEntities1 : DbContext
     {
-        public BusDBEntities9()
-            : base("name=BusDBEntities9")
+        public BusDBEntities1()
+            : base("name=BusDBEntities1")
         {
         }
     
@@ -25,9 +25,14 @@ namespace BusApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bus> Buses { get; set; }
-        public virtual DbSet<BusTrace> BusTraces { get; set; }
-        public virtual DbSet<Line> Lines { get; set; }
-        public virtual DbSet<Station> Stations { get; set; }
+        public virtual DbSet<Bus> Bus { get; set; }
+        public virtual DbSet<BusTrace> BusTrace { get; set; }
+        public virtual DbSet<Line> Line { get; set; }
+        public virtual DbSet<Measurements> Measurements { get; set; }
+        public virtual DbSet<Station> Station { get; set; }
+        public virtual DbSet<References> References { get; set; }
+        public virtual DbSet<Timetable> Timetable { get; set; }
+        public virtual DbSet<MeasuredData> MeasuredData { get; set; }
+        public virtual DbSet<ActualData> ActualData { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="hu">
 <head>
+   
     <style>
         .box {
             position: absolute;
@@ -14,7 +15,6 @@
                 border: none;
                 box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
                 -webkit-appearance: button;
-                appearance: button;
                 outline: none;
             }
 
@@ -50,7 +50,7 @@
             display:none;
         }
 
-        ul {
+        .lista {
             position: static;
             list-style-type: none;
             margin: 0;
@@ -59,11 +59,11 @@
             background-color: #333;
         }
 
-        li {
+        #elem {
             float: left;
         }
 
-            li a {
+            #elem a {
                 display: block;
                 color: white;
                 text-align: center;
@@ -71,24 +71,38 @@
                 text-decoration: none;
             }
 
-                li a:hover:not(.active) {
-                    background-color: #4495cf;
+                #elem a:hover:not(.active) {
+                    background-color: #71B6E6;
+                    color: black;
+                }
+
+                #elem a:hover, a:focus {
                     color: white;
                 }
 
-                li a:hover, a:focus {
-                    color: white;
-                }
-
-        .active {
-            background-color: #4495cf;
-            color: white;
+        #buses{
+            position: relative;
+            font-family: 'Lucida Sans';
+            font-size: 20px;
+            background-color: #71B6E6;
+            color:white;
+            width: 200px;
+            height: 40px;
+        }
+        #busStations {
+            position: relative;
+            font-family: 'Lucida Sans';
+            font-size: 20px;
+            background-color: #71B6E6;
+            color:white;
+            width: 200px;
+            height: 40px;
         }
 
-        .selected {
-            background-color: #0563af;
-            color: white;
-        }
+
+          
+
+
     </style>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -106,23 +120,47 @@
 </head>
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <ul>
-        <li><a id="buses" href="#">Buses</a></li>
-        <li><a id="stations" href="#">Stations</a></li>
-        <li><a id="lines" href="#">Lines</a></li>
-        <li><div class="box">
-        <select class="hidden" id="dropdown">
-            <option title="Please select a bus." value="-1">Routes</option>
-            @foreach (var bus in ViewBag.Buses)
-            {
-                @:<option title="@bus.BusId" value="@bus.BusId">@bus.BusName</option>
-            }
-        </select></div>
-    </li>
+    <ul class="lista">
+
+     
+        <li id="elem"><a id="Bus" href="#">Bus</a></li>
+        <li id="elem"><a id="stations" href="#">Stations</a></li>
+        <li id="elem"><a id="lines" href="#">Lines</a></li>
+        <li id="elem">
+            <div class="box">
+                <select class="hidden" id="dropdown" style="background-color:#9C9C9C">
+                    <option title="Please select a bus." value="-1">Routes</option>
+                    @foreach (var bus in ViewBag.Bus)
+                    {
+                        @:<option title="@bus.BusId" value="@bus.BusId">@bus.BusName</option>
+                    }
+                </select>
+            </div>
+        </li>
     </ul>
-    
+
+
+
+
     <div id="mapid"></div>
+
+    <div>
+        <select id="buses" onchange="changeStations()">
+            <option value=""> Select a bus </option>
+        </select>
+
+        <select id="busStations" onchange="showTimes()">
+            <option value=""> Select a station </option>
+        </select>
+    </div>
+    <div id="timetable">
+        <b>Start times:</b> 
+    </div>
+
     <script>
+
+
+        //Lekeri a jelenlegi helyzetet
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -135,30 +173,33 @@
             mypos = [position.coords.latitude, position.coords.longitude];
             markMyLocation();
         }
-
+        //Megjeleniti a jelenlegi poziciot
         function markMyLocation() {
             marker = L.marker([46.523454, 24.598617]/*mypos*/).addTo(mymap);
             //console.log(position.coords.latitude + " " + position.coords.longitude);
             marker.bindPopup("<b>Hello user!</b><br>That's your location.").openPopup();
         }
-        /////////////////////Events////////////////////////////////
-        var elm = document.getElementById("buses");
+
+
+        /////////////////////Events//////////////////////////////
+        //Hozzaadja vagy leveszi a Buslayert
+        var elm = document.getElementById("Bus");
         elm.onclick=(function (event) {
             event.preventDefault();
-            if (mymap.hasLayer(BusesLayer)) {
+            if (mymap.hasLayer(BusLayer)) {
                 $(this).removeClass('selected');
-                mymap.removeLayer(BusesLayer);
+                mymap.removeLayer(BusLayer);
             } else {
                 $("#dropdown").addClass('hidden');
                 $("#lines").removeClass('selected');
                 if (mymap.hasLayer(LineLayer)) {
                     mymap.removeLayer(LineLayer);
                 }
-                mymap.addLayer(BusesLayer);
+                mymap.addLayer(BusLayer);
                 $(this).addClass('selected');
             }
         });
-
+        //Kezeli a StationLayert
         var elm = document.getElementById("stations");
         elm.onclick = (function (event) {
             event.preventDefault();
@@ -175,13 +216,13 @@
                 $(this).addClass('selected');
             }
         });
-
+        //Kezeli a LineLayert
         var elm = document.getElementById("lines");
         elm.onclick = (function (event) {
             event.preventDefault();
-            if (mymap.hasLayer(BusesLayer)) {
-                $("#buses").removeClass('selected');
-                mymap.removeLayer(BusesLayer);
+            if (mymap.hasLayer(BusLayer)) {
+                $("#Bus").removeClass('selected');
+                mymap.removeLayer(BusLayer);
             }
             if (mymap.hasLayer(StationsLayer)) {
                 $("#stations").removeClass('selected');
@@ -230,13 +271,61 @@
                 }
             }
         });
-        //////////////////////////Data////////////////////////////
+
+
+        //////////////////////////Adatok betoltese////////////////////////////
+
+        //Eloallitja a measureddata adatokat
+        var measureddata = [];
+        @foreach (var measureddata in ViewBag.MeasuredData)
+        {
+            @:measureddata.push({ "id": "@measureddata.id", "From": "@measureddata.From", "To": "@measureddata.To", "duration": "@measureddata.duration", "dateTime": "@measureddata.dateTime" });
+        }
+
+        //Eloallitja a referencia adatokat
+        var references = [];
+        @foreach (var references in ViewBag.References)
+        {
+            @:references.push({ "id": "@references.id", "From": "@references.From", "To": "@references.To", "duration": "@references.duration", "intervalTime": "@references.intervalTime" });
+        }
+
+        //Eloallitja a timetable adatokat
+        var timetable = [];
+        @foreach (var timetable in ViewBag.Timetable)
+        {
+            @:timetable.push({ "id": "@timetable.id", "busNr": "@timetable.busNr", "startTime": "@timetable.startTime", "stationID": "@timetable.stationID", "weekday": "@timetable.weekday" });
+        }
+
+        //Eloallitja a line adatokat
+        var lines = [];
+        @foreach (var line in ViewBag.Line)
+        {
+            @:lines.push({ "Id": "@line.ID", "LineId": "@line.LineID", "StationID": "@line.StationID", "StationNr": "@line.StationNr" });
+        }
+
+        //Eloallitja a traceslist adatokat
         var tracesList = [];
         @foreach (var bus in ViewBag.BusTrace)
         {
            @:tracesList.push({ "Id": "@bus.Id", "BusId": "@bus.BusId", "Longitude": parseFloat("@bus.Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Latitude".replace(',', '.'))});
         }
+
+        //Eloallitja a stationoket
+        var stationList = [];
+        @foreach (var st in ViewBag.Stations)
+        {
+           @:stationList.push({ "StationName": "@st.StationName", "StationID": "@st.StationID", "Longitude": parseFloat("@st.Longitude".replace(',', '.')),"Latitude": parseFloat("@st.Latitude".replace(',', '.'))});
+        }
+
+         //Eloallitja a buszok listajat
+        var busList = [];
+        @foreach (var bus in ViewBag.Bus)
+        {
+           @:busList.push({ "BusName": "@bus.BusName", "BusId": "@bus.BusId", "Longitude": parseFloat("@bus.Actual_Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Actual_Latitude".replace(',', '.'))});
+        }
+
         var LineLayer;
+
         /*
         var temp = tracesList.map(function (s) {
             if(s.BusId = "27") { return [s.Latitude, s.Longitude] };
@@ -250,22 +339,15 @@
         var LineLayer = L.layerGroup([firstpolyline]);
         */
 
-        var busList = [];
-        @foreach (var bus in ViewBag.Buses)
-        {
-           @:busList.push({ "BusName": "@bus.BusName", "BusId": "@bus.BusId", "Longitude": parseFloat("@bus.Actual_Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Actual_Latitude".replace(',', '.'))});
-        }
 
         var temp = busList.map(function (s) {
             return L.marker([s.Latitude, s.Longitude]).bindPopup("<b>" + s.BusId + "</b><br>" + s.BusName);
         });
-        var BusesLayer = L.layerGroup(temp);
 
-        var stationList = [];
-        @foreach (var st in ViewBag.Stations)
-        {
-           @:stationList.push({ "StationName": "@st.StationName", "StationID": "@st.StationID", "Longitude": parseFloat("@st.Longitude".replace(',', '.')),"Latitude": parseFloat("@st.Latitude".replace(',', '.'))});
-        }
+
+        var BusLayer = L.layerGroup(temp);
+
+
         var greenIcon = new L.Icon({
             iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -274,9 +356,40 @@
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
         });
+
+
+        //Hozzaadja a station nevet a popuphoz
         var temp = stationList.map(function (s) {
-            return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup(s.StationName);
+            return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=stationName>' + s.StationName + '</a>' + '<br>' + '<button type=button onClick = btnOnClick() > More</> ' );
         });
+
+        function btnOnClick() {
+            var stationName = document.getElementById('stationName').innerHTML;
+            var stationId = stationList.find(a => a.StationName === stationName).StationID;
+            var buses = [];
+            lines.forEach((line) => {
+                if (line.StationID == stationId) {
+                    if (buses.indexOf(line.LineId) == -1) {
+                        buses.push(line.LineId);
+                    }
+                }
+            });
+
+            var tTable = [];
+            timetable.forEach(function (t) {
+                if (buses.indexOf(t.busNr) != -1) {
+                    var start = { bus: t.busNr, time: t.startTime, weekDay: t.weekday, startStation: t.stationID };
+                    if (tTable.indexOf(start) == -1) {
+                        tTable.push(start);
+                    }
+
+                }
+            });
+
+        }
+
+
+
         var StationsLayer = L.layerGroup(temp);
         //////////////////////////////////////////////////////
         var mypos;
@@ -293,46 +406,108 @@
 
 
 
-
-
-        /*
-        L.Routing.control({
-            waypoints: [
-                L.latLng(46.523454, 24.598617),
-                L.latLng(46.5117342, 24.5110409)
-            ],
-            routeWhileDragging: true
-        }).addTo(mymap);
-        */
-
-
-        /*
-        var circle = L.circle([46.523674547994766, 24.599113591698256], {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 50
-        }).addTo(mymap);
-        var polygon = L.polygon([
-            [46.522812, 24.598669],
-            [46.522812, 24.598669],
-            [46.522812, 24.598669]
-        ]).addTo(mymap);
-
-
-        polygon.bindPopup("I am a polygon.");
-        var popup = L.popup()
-            .setLatLng([46.523454, 24.598617])
-            .setContent("I am a standalone popup.")
-            .openOn(mymap);
-            */
-
-
-        function onMapClick(e) {
-            alert("You clicked the map at " + e.latlng);
-        }
+        //function onMapClick(e) {
+            //alert("You clicked the map at " + e.latlng);
+        //}
 
         //mymap.on('click', onMapClick);
+
+
+
+        var busSelect = document.getElementById("buses");
+        for (var i = 0; i < busList.length; i++) {
+            busSelect.innerHTML = busSelect.innerHTML +
+                '<option value="' + busList[i].BusId + '">' + busList[i].BusId + '</option>\n';
+        }
+
+        //var stationSelect = document.getElementById("busStations");
+        //for (var i = 0; i < stationList.length; i++) {
+        //    stationSelect.innerHTML = stationSelect.innerHTML +
+        //        '<option value="' + stationList[i].StationID + '">' + stationList[i].StationName + '</option>';
+        //}
+        //Start station ids
+        var startStationIds = [];
+        timetable.forEach((time) => {
+            if (startStationIds.indexOf(time.stationID) === -1) {
+                startStationIds.push(time.stationID);
+            }
+        });
+        //Start station ids with names
+        var startStations = [];
+        startStationIds.forEach((id) => {
+            var name = stationList.find(a => a.StationID == id).StationName;
+            startStations.push({ Id: id, Name: name });
+        });
+
+        function changeStations() {
+            var busNr = document.getElementById("buses").value;
+            var stationId = [];
+            var stations = [];
+            lines.forEach((line) => {
+                if (line.LineId === busNr) {
+                    if (stationId.indexOf(line.StationID) == -1) {
+                        var stationName = stationList.find(a => a.StationID == line.StationID).StationName;
+                        stationId.push(line.StationID);
+                        stations.push({ 'stationId': line.StationID, 'stationName': stationName });
+                    }
+                }
+            });
+
+            var stationSelect = document.getElementById("busStations");
+            var busOptions = stationSelect.innerHTML.trim().split('\n');
+            for (var i = 0; i < stations.length; i++) {
+                stationSelect.innerHTML = stationSelect.innerHTML +
+                    '<option value="' + stations[i].stationId + '">' + stations[i].stationName + '</option>';
+            }
+            
+            
+            var busOptions = document.getElementById("buses");
+            if (busOptions.innerHTML.includes("select") || busOptions.innerHTML.includes("Select")) {
+                var options = busOptions.innerHTML.trim().split('\n');
+                options.shift();
+                busOptions.innerHTML = options.join();
+            }
+        }
+
+        function showTimes() {
+            var busId = document.getElementById("buses").value;
+            var date = new Date().toString().split(' ');
+            var day = date[0];
+            var weekday = 1;
+            var time = date[4];
+            if (day.toLowerCase() === "sat" || day.toLowerCase === "sun") {
+                weekday = 0;
+            }
+            var timesForDays = [];
+            timetable.forEach((item) => {
+                if (item.weekday == weekday && item.busNr == busId) {
+                    timesForDays.push(item);
+                }
+            });
+            timesForDays.forEach((item) => {
+                item.stationName = startStations.find(a => a.Id == item.stationID).Name;
+            });
+            var times = document.getElementById("timetable");
+            var timesForStation1 = [];
+            var timesForStation2 = [];
+            timesForDays.forEach((item) => {
+                if (item.stationID == timesForDays[0].stationID) {
+                    timesForStation1.push({ Time: item.startTime, Station: item.stationName });
+                } else {
+                    timesForStation2.push({ Time: item.startTime, Station: item.stationName });
+                }
+            });
+            times.innerHTML = "<b>" + "Start times:" + "<br>" + timesForStation1[0].Station + "<br>" + timesForStation1.map(a => a.Time).join(', ') + "<br>" +
+                timesForStation2[0].Station + ":" + "<br>" + timesForStation2.map(a => a.Time).join(', ') + "</b>";
+            console.log(timesForDays);
+        }
+
+
+
+
+
     </script>
+
+
 </body>
 </html>

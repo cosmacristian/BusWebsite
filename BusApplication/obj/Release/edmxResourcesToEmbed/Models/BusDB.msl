@@ -1,7 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BusDBModelStoreContainer" CdmEntityContainer="BusDBEntities9">
-    <EntitySetMapping Name="Lines">
+  <EntityContainerMapping StorageEntityContainer="BusDBModelStoreContainer" CdmEntityContainer="BusDBEntities1">
+    <EntitySetMapping Name="Bus">
+      <EntityTypeMapping TypeName="BusDBModel.Bus">
+        <MappingFragment StoreEntitySet="Bus">
+          <ScalarProperty Name="BusId" ColumnName="BusId" />
+          <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
+          <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
+          <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+          <ScalarProperty Name="BusName" ColumnName="BusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusTrace">
+      <EntityTypeMapping TypeName="BusDBModel.BusTrace">
+        <MappingFragment StoreEntitySet="BusTrace">
+          <ScalarProperty Name="speed" ColumnName="speed" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BusId" ColumnName="BusId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Line">
       <EntityTypeMapping TypeName="BusDBModel.Line">
         <MappingFragment StoreEntitySet="Line">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -11,7 +34,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Stations">
+    <EntitySetMapping Name="Measurements">
+      <EntityTypeMapping TypeName="BusDBModel.Measurements">
+        <MappingFragment StoreEntitySet="Measurements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BusId" ColumnName="BusId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Position_Accuracy" ColumnName="Position_Accuracy" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="Speed_Accuracy" ColumnName="Speed_Accuracy" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Accel_x" ColumnName="Accel_x" />
+          <ScalarProperty Name="Accel_y" ColumnName="Accel_y" />
+          <ScalarProperty Name="Accel_z" ColumnName="Accel_z" />
+          <ScalarProperty Name="Gyro_x" ColumnName="Gyro_x" />
+          <ScalarProperty Name="Gyro_y" ColumnName="Gyro_y" />
+          <ScalarProperty Name="Gyro_z" ColumnName="Gyro_z" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Station">
       <EntityTypeMapping TypeName="BusDBModel.Station">
         <MappingFragment StoreEntitySet="Station">
           <ScalarProperty Name="StationID" ColumnName="StationID" />
@@ -21,25 +65,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Buses">
-      <EntityTypeMapping TypeName="BusDBModel.Bus">
-        <MappingFragment StoreEntitySet="Bus">
-          <ScalarProperty Name="BusName" ColumnName="BusName" />
-          <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
-          <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
-          <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
-          <ScalarProperty Name="BusId" ColumnName="BusId" />
+    <EntitySetMapping Name="References">
+      <EntityTypeMapping TypeName="BusDBModel.References">
+        <MappingFragment StoreEntitySet="References">
+          <ScalarProperty Name="intervalTime" ColumnName="intervalTime" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="To" ColumnName="To" />
+          <ScalarProperty Name="From" ColumnName="From" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BusTraces">
-      <EntityTypeMapping TypeName="BusDBModel.BusTrace">
-        <MappingFragment StoreEntitySet="BusTrace">
-          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-          <ScalarProperty Name="BusId" ColumnName="BusId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="Timetable">
+      <EntityTypeMapping TypeName="BusDBModel.Timetable">
+        <MappingFragment StoreEntitySet="Timetable">
+          <ScalarProperty Name="weekday" ColumnName="weekday" />
+          <ScalarProperty Name="stationID" ColumnName="stationID" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="busNr" ColumnName="busNr" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeasuredData">
+      <EntityTypeMapping TypeName="BusDBModel.MeasuredData">
+        <MappingFragment StoreEntitySet="MeasuredData">
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="To" ColumnName="To" />
+          <ScalarProperty Name="From" ColumnName="From" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

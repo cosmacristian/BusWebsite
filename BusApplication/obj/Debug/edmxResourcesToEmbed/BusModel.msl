@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BusDBModelStoreContainer" CdmEntityContainer="BusDBEntities1">
+    <EntitySetMapping Name="Buses">
+      <EntityTypeMapping TypeName="BusDBModel.Buses">
+        <MappingFragment StoreEntitySet="Buses">
+          <ScalarProperty Name="BusId" ColumnName="BusId" />
+          <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
+          <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
+          <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+          <ScalarProperty Name="BusName" ColumnName="BusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusTraces">
+      <EntityTypeMapping TypeName="BusDBModel.BusTraces">
+        <MappingFragment StoreEntitySet="BusTraces">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BusId" ColumnName="BusId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Line">
+      <EntityTypeMapping TypeName="BusDBModel.Line">
+        <MappingFragment StoreEntitySet="Line">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LineID" ColumnName="LineID" />
+          <ScalarProperty Name="StationID" ColumnName="StationID" />
+          <ScalarProperty Name="StationNr" ColumnName="StationNr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Station">
+      <EntityTypeMapping TypeName="BusDBModel.Station">
+        <MappingFragment StoreEntitySet="Station">
+          <ScalarProperty Name="StationID" ColumnName="StationID" />
+          <ScalarProperty Name="StationName" ColumnName="StationName" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

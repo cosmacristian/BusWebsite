@@ -19,5 +19,6 @@ namespace BusApplication.Models
         public double Longitude { get; set; }
         public double Latitude { get; set; }
         public System.DateTime Timestamp { get; set; }
+        public Nullable<double> speed { get; set; }
     }
 }

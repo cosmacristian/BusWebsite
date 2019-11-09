@@ -9,7 +9,7 @@ namespace BusApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BusDBEntities9 _dbcontext = new BusDBEntities9();
+        private readonly BusDBEntities1 _dbcontext = new BusDBEntities1();
         public ActionResult Index()
         {
             return View();
@@ -26,9 +26,13 @@ namespace BusApplication.Controllers
         public ActionResult Map()
         {
             ViewBag.Message = "Your contact page.";
-            ViewBag.Buses = _dbcontext.Buses.ToList();
-            ViewBag.BusTrace = _dbcontext.BusTraces.ToList();
-            ViewBag.Stations = _dbcontext.Stations.ToList();
+            ViewBag.Bus = _dbcontext.Bus.ToList();
+            ViewBag.BusTrace = _dbcontext.BusTrace.ToList();
+            ViewBag.Stations = _dbcontext.Station.ToList();
+            ViewBag.Line = _dbcontext.Line.ToList();
+            ViewBag.Timetable = _dbcontext.Timetable.ToList();
+            ViewBag.References = _dbcontext.References.ToList();
+            ViewBag.MeasuredData = _dbcontext.MeasuredData.ToList();
             return View();
         }
     }

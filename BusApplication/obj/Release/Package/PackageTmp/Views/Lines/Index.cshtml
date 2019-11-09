@@ -17,22 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.LineID)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.StationNr)
-        </th>
+        </th>*@
         <th></th>
     </tr>
     
-    @*<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Station.StationName)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Station.StationNr)
-        </th>
-        <th></th>
-    </tr>*@
 
 @foreach (var item in Model) {
     <tr>
@@ -42,10 +32,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.LineID)
         </td>
-        
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.StationID)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
             @Html.ActionLink("Details", "Details", new { id = item.ID }) |

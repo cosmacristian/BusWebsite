@@ -1,24 +1,118 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.navbar .navbar-nav {
+    float: none;
+    vertical-align: top;
+    margin: 0 auto;
+    text-align: center;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.navbar .navbar-collapse {
+    text-align: center;
+    padding: 10px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.navbar .MenuButtons {
+    padding: 20px;
+    color: white;
+    
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.navbar-nav.navbar-center {
+    float: none;
+    position: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+#anim {
+    position: relative;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 2em;
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #000, #fff, #000);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 3s linear infinite;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+@keyframes animate {
+    0% {
+        background-position: -500%;
+    }
+
+    100% {
+        background-position: 500%;
+    }
+}
+
+
+#textAnim {
+    color: black;
+    white-space: nowrap;
+    position: absolute;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    transition: 0.3s;
+    text-shadow: 1px 1px 0 white, 1px 2px 0 white, 1px 3px 0 white, 1px 4px 0 grey, 1px 5px 0 grey, 1px 6px 0 grey, 1px 7px 0 grey, 1px 8px 0 grey, 5px 13px 15px black;
+}
+
+    #textAnim:hover {
+        transition: 0.3s;
+        transform: scale(1.1)translate(-50%, -50%);
+        text-shadow: 1px -1px 0 grey, 1px -2px 0 grey, 1px -3px 0 grey, 1px -4px 0 grey, 1px -5px 0 grey, 1px -6px 0 grey, 1px -7px 0 grey, 1px -8px 0 grey, 5px -13px 15px black, 5px -13px 25px #808080;
+    }
+
+
+
+img.center {
+    position: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+footer {
+    position:relative;
+    height:10%;
+    bottom: 0;
+    width: 100%;
+    text-align:center;
+    color:black;
+}
+
+.card-body{
+    position:center;
+    padding:initial;
+}
+
+
+
+
+body, html {
+    height: 100%;
+}
+
+
+.bg {
+    /* The image used */
+    background-image: url("../Images/bg6.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

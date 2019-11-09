@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ActualData">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="BusNr" />
+            <PropertyRef Name="LastStation" />
+            <PropertyRef Name="Time" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusNr" Type="int" Nullable="false" />
+          <Property Name="LastStation" Type="int" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="Bus">
           <Key>
             <PropertyRef Name="BusId" />
@@ -24,6 +38,7 @@
           <Property Name="Longitude" Type="float" Nullable="false" />
           <Property Name="Latitude" Type="float" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="speed" Type="float" />
         </EntityType>
         <EntityType Name="Line">
           <Key>
@@ -34,6 +49,46 @@
           <Property Name="StationID" Type="int" Nullable="false" />
           <Property Name="StationNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="MeasuredData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="From" Type="int" Nullable="false" />
+          <Property Name="To" Type="int" Nullable="false" />
+          <Property Name="duration" Type="int" Nullable="false" />
+          <Property Name="dateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Measurements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Position_Accuracy" Type="float" Nullable="false" />
+          <Property Name="Speed" Type="float" Nullable="false" />
+          <Property Name="Speed_Accuracy" Type="float" Nullable="false" />
+          <Property Name="Direction" Type="int" Nullable="false" />
+          <Property Name="Accel_x" Type="float" Nullable="false" />
+          <Property Name="Accel_y" Type="float" Nullable="false" />
+          <Property Name="Accel_z" Type="float" Nullable="false" />
+          <Property Name="Gyro_x" Type="float" Nullable="false" />
+          <Property Name="Gyro_y" Type="float" Nullable="false" />
+          <Property Name="Gyro_z" Type="float" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="References">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="From" Type="int" Nullable="false" />
+          <Property Name="To" Type="int" Nullable="false" />
+          <Property Name="duration" Type="time" Precision="7" Nullable="false" />
+          <Property Name="intervalTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Station">
           <Key>
             <PropertyRef Name="StationID" />
@@ -42,6 +97,16 @@
           <Property Name="StationName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Longitude" Type="float" Nullable="false" />
           <Property Name="Latitude" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="busNr" Type="int" Nullable="false" />
+          <Property Name="startTime" Type="time" Precision="0" Nullable="false" />
+          <Property Name="stationID" Type="int" Nullable="false" />
+          <Property Name="weekday" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Line_Station">
           <End Role="Station" Type="Self.Station" Multiplicity="1" />
@@ -59,7 +124,19 @@
           <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusTrace" EntityType="Self.BusTrace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Line" EntityType="Self.Line" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeasuredData" EntityType="Self.MeasuredData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Measurements" EntityType="Self.Measurements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="References" EntityType="Self.References" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Station" EntityType="Self.Station" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActualData" EntityType="Self.ActualData" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ActualData].[ID] AS [ID], 
+    [ActualData].[BusNr] AS [BusNr], 
+    [ActualData].[LastStation] AS [LastStation], 
+    [ActualData].[Time] AS [Time]
+    FROM [dbo].[ActualData] AS [ActualData]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Line_Station" Association="Self.FK_Line_Station">
             <End Role="Station" EntitySet="Station" />
             <End Role="Line" EntitySet="Line" />
@@ -69,21 +146,11 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="BusDBEntities9" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Buses" EntityType="BusDBModel.Bus" />
-          <EntitySet Name="BusTraces" EntityType="BusDBModel.BusTrace" />
-          <EntitySet Name="Lines" EntityType="BusDBModel.Line" />
-          <EntitySet Name="Stations" EntityType="BusDBModel.Station" />
-          <AssociationSet Name="FK_Line_Station" Association="BusDBModel.FK_Line_Station">
-            <End Role="Station" EntitySet="Stations" />
-            <End Role="Line" EntitySet="Lines" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Bus">
           <Key>
             <PropertyRef Name="BusId" />
           </Key>
-          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Actual_Longitude" Type="Double" Nullable="false" />
           <Property Name="Actual_Latitude" Type="Double" Nullable="false" />
           <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
@@ -94,10 +161,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Longitude" Type="Double" Nullable="false" />
           <Property Name="Latitude" Type="Double" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="speed" Type="Double" />
         </EntityType>
         <EntityType Name="Line">
           <Key>
@@ -107,21 +175,41 @@
           <Property Name="LineID" Type="Int32" Nullable="false" />
           <Property Name="StationID" Type="Int32" Nullable="false" />
           <Property Name="StationNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Station" Relationship="BusDBModel.FK_Line_Station" FromRole="Line" ToRole="Station" />
+          <NavigationProperty Name="Station" Relationship="Self.FK_Line_Station" FromRole="Line" ToRole="Station" />
+        </EntityType>
+        <EntityType Name="Measurements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Position_Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Speed" Type="Double" Nullable="false" />
+          <Property Name="Speed_Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Direction" Type="Int32" Nullable="false" />
+          <Property Name="Accel_x" Type="Double" Nullable="false" />
+          <Property Name="Accel_y" Type="Double" Nullable="false" />
+          <Property Name="Accel_z" Type="Double" Nullable="false" />
+          <Property Name="Gyro_x" Type="Double" Nullable="false" />
+          <Property Name="Gyro_y" Type="Double" Nullable="false" />
+          <Property Name="Gyro_z" Type="Double" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="Station">
           <Key>
             <PropertyRef Name="StationID" />
           </Key>
           <Property Name="StationID" Type="Int32" Nullable="false" />
-          <Property Name="StationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Longitude" Type="Double" Nullable="false" />
           <Property Name="Latitude" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Lines" Relationship="BusDBModel.FK_Line_Station" FromRole="Station" ToRole="Line" />
+          <NavigationProperty Name="Line" Relationship="Self.FK_Line_Station" FromRole="Station" ToRole="Line" />
         </EntityType>
         <Association Name="FK_Line_Station">
-          <End Type="BusDBModel.Station" Role="Station" Multiplicity="1" />
-          <End Type="BusDBModel.Line" Role="Line" Multiplicity="*" />
+          <End Role="Station" Type="Self.Station" Multiplicity="1" />
+          <End Role="Line" Type="Self.Line" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Station">
               <PropertyRef Name="StationID" />
@@ -131,51 +219,173 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="BusDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bus" EntityType="Self.Bus" />
+          <EntitySet Name="BusTrace" EntityType="Self.BusTrace" />
+          <EntitySet Name="Line" EntityType="Self.Line" />
+          <EntitySet Name="Measurements" EntityType="Self.Measurements" />
+          <EntitySet Name="Station" EntityType="Self.Station" />
+          <AssociationSet Name="FK_Line_Station" Association="Self.FK_Line_Station">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Line" EntitySet="Line" />
+          </AssociationSet>
+          <EntitySet Name="References" EntityType="BusDBModel.References" />
+          <EntitySet Name="Timetable" EntityType="BusDBModel.Timetable" />
+          <EntitySet Name="MeasuredData" EntityType="BusDBModel.MeasuredData" />
+          <EntitySet Name="ActualData" EntityType="BusDBModel.ActualData" />
+        </EntityContainer>
+        <EntityType Name="References">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From" Type="Int32" Nullable="false" />
+          <Property Name="To" Type="Int32" Nullable="false" />
+          <Property Name="duration" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="intervalTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="busNr" Type="Int32" Nullable="false" />
+          <Property Name="startTime" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="stationID" Type="Int32" Nullable="false" />
+          <Property Name="weekday" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeasuredData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From" Type="Int32" Nullable="false" />
+          <Property Name="To" Type="Int32" Nullable="false" />
+          <Property Name="duration" Type="Int32" Nullable="false" />
+          <Property Name="dateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ActualData">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="BusNr" />
+            <PropertyRef Name="LastStation" />
+            <PropertyRef Name="Time" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusNr" Type="Int32" Nullable="false" />
+          <Property Name="LastStation" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BusDBModelStoreContainer" CdmEntityContainer="BusDBEntities9">
-          <EntitySetMapping Name="Buses">
+        <EntityContainerMapping StorageEntityContainer="BusDBModelStoreContainer" CdmEntityContainer="BusDBEntities1">
+          <EntitySetMapping Name="Bus">
             <EntityTypeMapping TypeName="BusDBModel.Bus">
               <MappingFragment StoreEntitySet="Bus">
-                <ScalarProperty Name="BusName" ColumnName="BusName" />
-                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
-                <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
-                <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
                 <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
+                <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
+                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+                <ScalarProperty Name="BusName" ColumnName="BusName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BusTraces">
+          <EntitySetMapping Name="BusTrace">
             <EntityTypeMapping TypeName="BusDBModel.BusTrace">
               <MappingFragment StoreEntitySet="BusTrace">
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="speed" ColumnName="speed" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Lines">
+          <EntitySetMapping Name="Line">
             <EntityTypeMapping TypeName="BusDBModel.Line">
               <MappingFragment StoreEntitySet="Line">
-                <ScalarProperty Name="StationNr" ColumnName="StationNr" />
-                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="StationNr" ColumnName="StationNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measurements">
+            <EntityTypeMapping TypeName="BusDBModel.Measurements">
+              <MappingFragment StoreEntitySet="Measurements">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Position_Accuracy" ColumnName="Position_Accuracy" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Speed_Accuracy" ColumnName="Speed_Accuracy" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Accel_x" ColumnName="Accel_x" />
+                <ScalarProperty Name="Accel_y" ColumnName="Accel_y" />
+                <ScalarProperty Name="Accel_z" ColumnName="Accel_z" />
+                <ScalarProperty Name="Gyro_x" ColumnName="Gyro_x" />
+                <ScalarProperty Name="Gyro_y" ColumnName="Gyro_y" />
+                <ScalarProperty Name="Gyro_z" ColumnName="Gyro_z" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Station">
+            <EntityTypeMapping TypeName="BusDBModel.Station">
+              <MappingFragment StoreEntitySet="Station">
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="StationName" ColumnName="StationName" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="References">
+            <EntityTypeMapping TypeName="BusDBModel.References">
+              <MappingFragment StoreEntitySet="References">
+                <ScalarProperty Name="intervalTime" ColumnName="intervalTime" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timetable">
+            <EntityTypeMapping TypeName="BusDBModel.Timetable">
+              <MappingFragment StoreEntitySet="Timetable">
+                <ScalarProperty Name="weekday" ColumnName="weekday" />
+                <ScalarProperty Name="stationID" ColumnName="stationID" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="busNr" ColumnName="busNr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeasuredData">
+            <EntityTypeMapping TypeName="BusDBModel.MeasuredData">
+              <MappingFragment StoreEntitySet="MeasuredData">
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Stations">
-            <EntityTypeMapping TypeName="BusDBModel.Station">
-              <MappingFragment StoreEntitySet="Station">
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="StationName" ColumnName="StationName" />
-                <ScalarProperty Name="StationID" ColumnName="StationID" />
+          <EntitySetMapping Name="ActualData">
+            <EntityTypeMapping TypeName="BusDBModel.ActualData">
+              <MappingFragment StoreEntitySet="ActualData">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="LastStation" ColumnName="LastStation" />
+                <ScalarProperty Name="BusNr" ColumnName="BusNr" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -193,7 +403,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

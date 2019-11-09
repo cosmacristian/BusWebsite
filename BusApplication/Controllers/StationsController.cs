@@ -12,12 +12,12 @@ namespace BusApplication.Controllers
 {
     public class StationsController : Controller
     {
-        private BusDBEntities9 db = new BusDBEntities9();
+        private BusDBEntities1 db = new BusDBEntities1();
 
         // GET: Stations
         public ActionResult Index()
         {
-            return View(db.Stations.ToList());
+            return View(db.Station.ToList());
         }
 
         // GET: Stations/Details/5
@@ -27,7 +27,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Station station = db.Stations.Find(id);
+            Station station = db.Station.Find(id);
             if (station == null)
             {
                 return HttpNotFound();
@@ -42,19 +42,15 @@ namespace BusApplication.Controllers
         }
 
         // POST: Stations/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "StationID,StationName,Longitude,Latitude")]*/ StationViewModel nst)
+        public ActionResult Create([Bind(Include = "StationID,StationName,Longitude,Latitude")] Station station)
         {
-            Station station = new Station();
-            station.StationID = nst.StationID;
-            station.StationName = nst.StationName;
-            station.Longitude = double.Parse(nst.Longitude.Replace('.', ','));
-            station.Latitude = double.Parse(nst.Latitude.Replace('.', ','));
-
             if (ModelState.IsValid)
             {
-                db.Stations.Add(station);
+                db.Station.Add(station);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -69,7 +65,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Station station = db.Stations.Find(id);
+            Station station = db.Station.Find(id);
             if (station == null)
             {
                 return HttpNotFound();
@@ -78,14 +74,14 @@ namespace BusApplication.Controllers
         }
 
         // POST: Stations/Edit/5
-
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StationID,StationName,Longitude,Latitude")] Station station)
         {
             if (ModelState.IsValid)
             {
-
                 db.Entry(station).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -100,7 +96,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Station station = db.Stations.Find(id);
+            Station station = db.Station.Find(id);
             if (station == null)
             {
                 return HttpNotFound();
@@ -113,8 +109,8 @@ namespace BusApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Station station = db.Stations.Find(id);
-            db.Stations.Remove(station);
+            Station station = db.Station.Find(id);
+            db.Station.Remove(station);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

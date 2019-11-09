@@ -17,7 +17,7 @@ namespace BusApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Station()
         {
-            this.Lines = new HashSet<Line>();
+            this.Line = new HashSet<Line>();
         }
     
         public int StationID { get; set; }
@@ -26,6 +26,6 @@ namespace BusApplication.Models
         public double Latitude { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Line> Lines { get; set; }
+        public virtual ICollection<Line> Line { get; set; }
     }
 }

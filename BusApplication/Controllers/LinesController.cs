@@ -12,12 +12,12 @@ namespace BusApplication.Controllers
 {
     public class LinesController : Controller
     {
-        private BusDBEntities9 db = new BusDBEntities9();
+        private BusDBEntities1 db = new BusDBEntities1();
 
         // GET: Lines
         public ActionResult Index()
         {
-            var lines = db.Lines.Include(l => l.Station).ToList();
+            var lines = db.Line.Include(l => l.Station).ToList();
             return View(lines);
         }
 
@@ -28,7 +28,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Line line = db.Lines.Find(id);
+            Line line = db.Line.Find(id);
             if (line == null)
             {
                 return HttpNotFound();
@@ -39,7 +39,7 @@ namespace BusApplication.Controllers
         // GET: Lines/Create
         public ActionResult Create()
         {
-            ViewBag.StationID = new SelectList(db.Stations, "StationID", "StationName");
+            ViewBag.StationID = new SelectList(db.Station, "StationID", "StationName");
             return View();
         }
 
@@ -51,15 +51,15 @@ namespace BusApplication.Controllers
             if (ModelState.IsValid)
             {
 
-                var id = db.Lines.Count();
+                var id = db.Line.Count();
                 line.ID = id;
 
-                db.Lines.Add(line);
+                db.Line.Add(line);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StationID = new SelectList(db.Stations, "StationID", "StationName", line.StationID);
+            ViewBag.StationID = new SelectList(db.Station, "StationID", "StationName", line.StationID);
             return View(line);
         }
 
@@ -70,12 +70,12 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Line line = db.Lines.Find(id);
+            Line line = db.Line.Find(id);
             if (line == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.StationID = new SelectList(db.Stations, "StationID", "StationName", line.StationID);
+            ViewBag.StationID = new SelectList(db.Station, "StationID", "StationName", line.StationID);
             return View(line);
         }
 
@@ -92,7 +92,7 @@ namespace BusApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.StationID = new SelectList(db.Stations, "StationID", "StationName", line.StationID
+            ViewBag.StationID = new SelectList(db.Station, "StationID", "StationName", line.StationID
                 );
             return View(line);
         }
@@ -104,7 +104,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Line line = db.Lines.Find(id);
+            Line line = db.Line.Find(id);
             if (line == null)
             {
                 return HttpNotFound();
@@ -117,8 +117,8 @@ namespace BusApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Line line = db.Lines.Find(id);
-            db.Lines.Remove(line);
+            Line line = db.Line.Find(id);
+            db.Line.Remove(line);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
