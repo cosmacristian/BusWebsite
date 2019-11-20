@@ -1,28 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="BusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="ActualData">
+  <EntityType Name="BusData">
     <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="BusNr" />
-      <PropertyRef Name="LastStation" />
-      <PropertyRef Name="Time" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BusNr" Type="int" Nullable="false" />
-    <Property Name="LastStation" Type="int" Nullable="false" />
-    <Property Name="Time" Type="time" Precision="0" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Actual_Longitude" Type="float" Nullable="false" />
+    <Property Name="Actual_Latitude" Type="float" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="Actual_Speed" Type="float" Nullable="false" />
+    <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
-  <EntityType Name="Bus">
+  <EntityType Name="BusDriverData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="Position_Accuracy" Type="float" Nullable="false" />
+    <Property Name="Speed" Type="float" Nullable="false" />
+    <Property Name="Speed_Accuracy" Type="float" Nullable="false" />
+    <Property Name="Direction" Type="int" Nullable="false" />
+    <Property Name="Accel_x" Type="float" Nullable="false" />
+    <Property Name="Accel_y" Type="float" Nullable="false" />
+    <Property Name="Accel_z" Type="float" Nullable="false" />
+    <Property Name="Gyro_x" Type="float" Nullable="false" />
+    <Property Name="Gyro_y" Type="float" Nullable="false" />
+    <Property Name="Gyro_z" Type="float" Nullable="false" />
+    <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Trace_Match" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Buses">
     <Key>
       <PropertyRef Name="BusId" />
     </Key>
     <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Actual_Longitude" Type="float" Nullable="false" />
-    <Property Name="Actual_Latitude" Type="float" Nullable="false" />
-    <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
-    <Property Name="BusName" Type="varchar" MaxLength="50" />
+    <Property Name="BusName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BusPositions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Datapoints_nearby" Type="int" />
   </EntityType>
   <EntityType Name="BusTrace">
     <Key>
@@ -34,6 +60,27 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
     <Property Name="Latitude" Type="float" Nullable="false" />
     <Property Name="Timestamp" Type="datetime" Nullable="false" />
     <Property Name="speed" Type="float" />
+  </EntityType>
+  <EntityType Name="CarData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="Position_Accuracy" Type="float" Nullable="false" />
+    <Property Name="Speed" Type="float" Nullable="false" />
+    <Property Name="Speed_Accuracy" Type="float" Nullable="false" />
+    <Property Name="Direction" Type="int" Nullable="false" />
+    <Property Name="Accel_x" Type="float" Nullable="false" />
+    <Property Name="Accel_y" Type="float" Nullable="false" />
+    <Property Name="Accel_z" Type="float" Nullable="false" />
+    <Property Name="Gyro_x" Type="float" Nullable="false" />
+    <Property Name="Gyro_y" Type="float" Nullable="false" />
+    <Property Name="Gyro_z" Type="float" Nullable="false" />
+    <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Trace_Match" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Line">
     <Key>
@@ -73,6 +120,7 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
     <Property Name="Gyro_y" Type="float" Nullable="false" />
     <Property Name="Gyro_z" Type="float" Nullable="false" />
     <Property Name="Timestamp" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Trace_Match" Type="int" />
   </EntityType>
   <EntityType Name="References">
     <Key>
@@ -83,6 +131,15 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
     <Property Name="To" Type="int" Nullable="false" />
     <Property Name="duration" Type="time" Precision="7" Nullable="false" />
     <Property Name="intervalTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SimulatedBus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastCheckin" Type="int" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Station">
     <Key>
@@ -103,6 +160,54 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
     <Property Name="stationID" Type="int" Nullable="false" />
     <Property Name="weekday" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK_BusData_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="BusData" Type="Self.BusData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="BusData">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusDriverData_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="BusDriverData" Type="Self.BusDriverData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="BusDriverData">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusPositions_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="BusPositions" Type="Self.BusPositions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="BusPositions">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarData_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="CarData" Type="Self.CarData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="CarData">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Line_Station">
     <End Role="Station" Type="Self.Station" Multiplicity="1" />
     <End Role="Line" Type="Self.Line" Multiplicity="*" />
@@ -115,26 +220,72 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SimulatedBus_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="SimulatedBus" Type="Self.SimulatedBus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="SimulatedBus">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="arrivalTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="busID" Type="nvarchar" Mode="In" />
+    <Parameter Name="stationID" Type="int" Mode="In" />
+    <Parameter Name="time_needed" Type="time" Mode="InOut" />
+  </Function>
+  <Function Name="calcDistanceKM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="lat1" Type="float" Mode="In" />
+    <Parameter Name="lat2" Type="float" Mode="In" />
+    <Parameter Name="lon1" Type="float" Mode="In" />
+    <Parameter Name="lon2" Type="float" Mode="In" />
+  </Function>
+  <Function Name="simulateBus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="busID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="stationSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="stationID" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="BusDBModelStoreContainer">
-    <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusData" EntityType="Self.BusData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusDriverData" EntityType="Self.BusDriverData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Buses" EntityType="Self.Buses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusPositions" EntityType="Self.BusPositions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BusTrace" EntityType="Self.BusTrace" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarData" EntityType="Self.CarData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Line" EntityType="Self.Line" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MeasuredData" EntityType="Self.MeasuredData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Measurements" EntityType="Self.Measurements" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="References" EntityType="Self.References" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SimulatedBus" EntityType="Self.SimulatedBus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Station" EntityType="Self.Station" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ActualData" EntityType="Self.ActualData" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ActualData].[ID] AS [ID], 
-    [ActualData].[BusNr] AS [BusNr], 
-    [ActualData].[LastStation] AS [LastStation], 
-    [ActualData].[Time] AS [Time]
-    FROM [dbo].[ActualData] AS [ActualData]</DefiningQuery>
-    </EntitySet>
+    <AssociationSet Name="FK_BusData_Buses" Association="Self.FK_BusData_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="BusData" EntitySet="BusData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusDriverData_Buses" Association="Self.FK_BusDriverData_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="BusDriverData" EntitySet="BusDriverData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusPositions_Buses" Association="Self.FK_BusPositions_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="BusPositions" EntitySet="BusPositions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarData_Buses" Association="Self.FK_CarData_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="CarData" EntitySet="CarData" />
+    </AssociationSet>
     <AssociationSet Name="FK_Line_Station" Association="Self.FK_Line_Station">
       <End Role="Station" EntitySet="Station" />
       <End Role="Line" EntitySet="Line" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SimulatedBus_Buses" Association="Self.FK_SimulatedBus_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="SimulatedBus" EntitySet="SimulatedBus" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

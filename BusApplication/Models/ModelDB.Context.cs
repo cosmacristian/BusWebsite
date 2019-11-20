@@ -25,7 +25,7 @@ namespace BusApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bus> Bus { get; set; }
+        public virtual DbSet<BusPositions> Bus { get; set; }
         public virtual DbSet<BusTrace> BusTrace { get; set; }
         public virtual DbSet<Line> Line { get; set; }
         public virtual DbSet<Measurements> Measurements { get; set; }

@@ -29,5 +29,6 @@ namespace BusApplication.Models
         public double Gyro_y { get; set; }
         public double Gyro_z { get; set; }
         public System.DateTime Timestamp { get; set; }
+        public Nullable<int> Trace_Match { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace BusApplication.Controllers
         public ActionResult Map()
         {
             ViewBag.Message = "Your contact page.";
-            ViewBag.Bus = _dbcontext.Bus.ToList();
+            ViewBag.Bus = _dbcontext.BusPositions.ToList();
             ViewBag.BusTrace = _dbcontext.BusTrace.ToList();
             ViewBag.Stations = _dbcontext.Station.ToList();
             ViewBag.Line = _dbcontext.Line.ToList();

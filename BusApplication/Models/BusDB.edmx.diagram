@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4dbd75c2701948168aa08ec66aa77a4a" Name="Diagram1">
-        <EntityTypeShape EntityType="BusDBModel.Bus" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BusDBModel.BusTrace" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BusDBModel.Line" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BusDBModel.Measurements" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
@@ -14,7 +13,17 @@
         <EntityTypeShape EntityType="BusDBModel.References" Width="1.5" PointX="7.625" PointY="0.875" />
         <EntityTypeShape EntityType="BusDBModel.Timetable" Width="1.5" PointX="5.375" PointY="0.875" />
         <EntityTypeShape EntityType="BusDBModel.MeasuredData" Width="1.5" PointX="7.5" PointY="3.75" />
-        <EntityTypeShape EntityType="BusDBModel.ActualData" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BusDBModel.BusData" Width="1.5" PointX="9.625" PointY="23.625" />
+        <EntityTypeShape EntityType="BusDBModel.BusDriverData" Width="1.5" PointX="9.625" PointY="18.625" />
+        <EntityTypeShape EntityType="BusDBModel.Buses" Width="1.5" PointX="7.375" PointY="15.75" />
+        <EntityTypeShape EntityType="BusDBModel.BusPositions" Width="1.5" PointX="9.625" PointY="15.5" />
+        <EntityTypeShape EntityType="BusDBModel.CarData" Width="1.5" PointX="9.625" PointY="10.5" />
+        <EntityTypeShape EntityType="BusDBModel.SimulatedBus" Width="1.5" PointX="9.625" PointY="7.75" />
+        <AssociationConnector Association="BusDBModel.FK_BusData_Buses" />
+        <AssociationConnector Association="BusDBModel.FK_BusDriverData_Buses" />
+        <AssociationConnector Association="BusDBModel.FK_BusPositions_Buses" />
+        <AssociationConnector Association="BusDBModel.FK_CarData_Buses" />
+        <AssociationConnector Association="BusDBModel.FK_SimulatedBus_Buses" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,7 +17,7 @@ namespace BusApplication.Controllers
         // GET: ActualDatas
         public ActionResult Index()
         {
-            return View(db.ActualData.ToList());
+            return View(db.SimulatedBus.ToList());
         }
 
         // GET: ActualDatas/Details/5
@@ -27,7 +27,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ActualData actualData = db.ActualData.Find(id);
+            SimulatedBus actualData = db.SimulatedBus.Find(id);
             if (actualData == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace BusApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,BusNr,LastStation,Time")] ActualData actualData)
+        public ActionResult Create([Bind(Include = "ID,BusNr,LastStation,Time")] SimulatedBus actualData)
         {
             if (ModelState.IsValid)
             {
-                db.ActualData.Add(actualData);
+                db.SimulatedBus.Add(actualData);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ActualData actualData = db.ActualData.Find(id);
+            SimulatedBus actualData = db.SimulatedBus.Find(id);
             if (actualData == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace BusApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,BusNr,LastStation,Time")] ActualData actualData)
+        public ActionResult Edit([Bind(Include = "ID,BusNr,LastStation,Time")] SimulatedBus actualData)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace BusApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ActualData actualData = db.ActualData.Find(id);
+            SimulatedBus actualData = db.SimulatedBus.Find(id);
             if (actualData == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace BusApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ActualData actualData = db.ActualData.Find(id);
-            db.ActualData.Remove(actualData);
+            SimulatedBus actualData = db.SimulatedBus.Find(id);
+            db.SimulatedBus.Remove(actualData);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

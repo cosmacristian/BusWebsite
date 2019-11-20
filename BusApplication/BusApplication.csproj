@@ -161,7 +161,7 @@
     <Compile Include="Models\ActualData.cs">
       <DependentUpon>BusDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bus.cs">
+    <Compile Include="Models\BusData.cs">
       <DependentUpon>BusDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BusDB.Context.cs">
@@ -179,7 +179,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BusDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusDriverData.cs">
+      <DependentUpon>BusDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Buses.cs">
+      <DependentUpon>BusDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BusPositions.cs">
+      <DependentUpon>BusDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BusTrace.cs">
+      <DependentUpon>BusDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarData.cs">
       <DependentUpon>BusDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DoubleModelBinder.cs" />
@@ -208,6 +220,9 @@
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\References.cs">
+      <DependentUpon>BusDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SimulatedBus.cs">
       <DependentUpon>BusDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Station.cs">
@@ -295,6 +310,8 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

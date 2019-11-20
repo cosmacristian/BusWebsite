@@ -5,29 +5,55 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ActualData">
+        <EntityType Name="BusData">
           <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="BusNr" />
-            <PropertyRef Name="LastStation" />
-            <PropertyRef Name="Time" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BusNr" Type="int" Nullable="false" />
-          <Property Name="LastStation" Type="int" Nullable="false" />
-          <Property Name="Time" Type="time" Precision="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Actual_Longitude" Type="float" Nullable="false" />
+          <Property Name="Actual_Latitude" Type="float" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Actual_Speed" Type="float" Nullable="false" />
+          <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <EntityType Name="Bus">
+        <EntityType Name="BusDriverData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Position_Accuracy" Type="float" Nullable="false" />
+          <Property Name="Speed" Type="float" Nullable="false" />
+          <Property Name="Speed_Accuracy" Type="float" Nullable="false" />
+          <Property Name="Direction" Type="int" Nullable="false" />
+          <Property Name="Accel_x" Type="float" Nullable="false" />
+          <Property Name="Accel_y" Type="float" Nullable="false" />
+          <Property Name="Accel_z" Type="float" Nullable="false" />
+          <Property Name="Gyro_x" Type="float" Nullable="false" />
+          <Property Name="Gyro_y" Type="float" Nullable="false" />
+          <Property Name="Gyro_z" Type="float" Nullable="false" />
+          <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Trace_Match" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Buses">
           <Key>
             <PropertyRef Name="BusId" />
           </Key>
           <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Actual_Longitude" Type="float" Nullable="false" />
-          <Property Name="Actual_Latitude" Type="float" Nullable="false" />
-          <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
-          <Property Name="BusName" Type="varchar" MaxLength="50" />
+          <Property Name="BusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusPositions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Datapoints_nearby" Type="int" />
         </EntityType>
         <EntityType Name="BusTrace">
           <Key>
@@ -39,6 +65,27 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <Property Name="Latitude" Type="float" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="speed" Type="float" />
+        </EntityType>
+        <EntityType Name="CarData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Position_Accuracy" Type="float" Nullable="false" />
+          <Property Name="Speed" Type="float" Nullable="false" />
+          <Property Name="Speed_Accuracy" Type="float" Nullable="false" />
+          <Property Name="Direction" Type="int" Nullable="false" />
+          <Property Name="Accel_x" Type="float" Nullable="false" />
+          <Property Name="Accel_y" Type="float" Nullable="false" />
+          <Property Name="Accel_z" Type="float" Nullable="false" />
+          <Property Name="Gyro_x" Type="float" Nullable="false" />
+          <Property Name="Gyro_y" Type="float" Nullable="false" />
+          <Property Name="Gyro_z" Type="float" Nullable="false" />
+          <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Trace_Match" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Line">
           <Key>
@@ -78,6 +125,7 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <Property Name="Gyro_y" Type="float" Nullable="false" />
           <Property Name="Gyro_z" Type="float" Nullable="false" />
           <Property Name="Timestamp" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Trace_Match" Type="int" />
         </EntityType>
         <EntityType Name="References">
           <Key>
@@ -88,6 +136,15 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <Property Name="To" Type="int" Nullable="false" />
           <Property Name="duration" Type="time" Precision="7" Nullable="false" />
           <Property Name="intervalTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SimulatedBus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastCheckin" Type="int" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="BusId" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Station">
           <Key>
@@ -108,6 +165,54 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <Property Name="stationID" Type="int" Nullable="false" />
           <Property Name="weekday" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_BusData_Buses">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="BusData" Type="Self.BusData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="BusData">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusDriverData_Buses">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="BusDriverData" Type="Self.BusDriverData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="BusDriverData">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusPositions_Buses">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="BusPositions" Type="Self.BusPositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="BusPositions">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarData_Buses">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="CarData" Type="Self.CarData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="CarData">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Line_Station">
           <End Role="Station" Type="Self.Station" Multiplicity="1" />
           <End Role="Line" Type="Self.Line" Multiplicity="*" />
@@ -120,42 +225,78 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SimulatedBus_Buses">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="SimulatedBus" Type="Self.SimulatedBus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="SimulatedBus">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="arrivalTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="busID" Type="nvarchar" Mode="In" />
+          <Parameter Name="stationID" Type="int" Mode="In" />
+          <Parameter Name="time_needed" Type="time" Mode="InOut" />
+        </Function>
+        <Function Name="calcDistanceKM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+          <Parameter Name="lat1" Type="float" Mode="In" />
+          <Parameter Name="lat2" Type="float" Mode="In" />
+          <Parameter Name="lon1" Type="float" Mode="In" />
+          <Parameter Name="lon2" Type="float" Mode="In" />
+        </Function>
+        <Function Name="simulateBus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="busID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="stationSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="stationID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="BusDBModelStoreContainer">
-          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusData" EntityType="Self.BusData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusDriverData" EntityType="Self.BusDriverData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buses" EntityType="Self.Buses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusPositions" EntityType="Self.BusPositions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusTrace" EntityType="Self.BusTrace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarData" EntityType="Self.CarData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Line" EntityType="Self.Line" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MeasuredData" EntityType="Self.MeasuredData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Measurements" EntityType="Self.Measurements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="References" EntityType="Self.References" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SimulatedBus" EntityType="Self.SimulatedBus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Station" EntityType="Self.Station" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ActualData" EntityType="Self.ActualData" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ActualData].[ID] AS [ID], 
-    [ActualData].[BusNr] AS [BusNr], 
-    [ActualData].[LastStation] AS [LastStation], 
-    [ActualData].[Time] AS [Time]
-    FROM [dbo].[ActualData] AS [ActualData]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_BusData_Buses" Association="Self.FK_BusData_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="BusData" EntitySet="BusData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusDriverData_Buses" Association="Self.FK_BusDriverData_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="BusDriverData" EntitySet="BusDriverData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusPositions_Buses" Association="Self.FK_BusPositions_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="BusPositions" EntitySet="BusPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarData_Buses" Association="Self.FK_CarData_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="CarData" EntitySet="CarData" />
+          </AssociationSet>
           <AssociationSet Name="FK_Line_Station" Association="Self.FK_Line_Station">
             <End Role="Station" EntitySet="Station" />
             <End Role="Line" EntitySet="Line" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SimulatedBus_Buses" Association="Self.FK_SimulatedBus_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="SimulatedBus" EntitySet="SimulatedBus" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Bus">
-          <Key>
-            <PropertyRef Name="BusId" />
-          </Key>
-          <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Actual_Longitude" Type="Double" Nullable="false" />
-          <Property Name="Actual_Latitude" Type="Double" Nullable="false" />
-          <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="BusTrace">
           <Key>
             <PropertyRef Name="Id" />
@@ -196,6 +337,7 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <Property Name="Gyro_y" Type="Double" Nullable="false" />
           <Property Name="Gyro_z" Type="Double" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Trace_Match" Type="Int32" />
         </EntityType>
         <EntityType Name="Station">
           <Key>
@@ -220,7 +362,6 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BusDBEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bus" EntityType="Self.Bus" />
           <EntitySet Name="BusTrace" EntityType="Self.BusTrace" />
           <EntitySet Name="Line" EntityType="Self.Line" />
           <EntitySet Name="Measurements" EntityType="Self.Measurements" />
@@ -232,7 +373,43 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <EntitySet Name="References" EntityType="BusDBModel.References" />
           <EntitySet Name="Timetable" EntityType="BusDBModel.Timetable" />
           <EntitySet Name="MeasuredData" EntityType="BusDBModel.MeasuredData" />
-          <EntitySet Name="ActualData" EntityType="BusDBModel.ActualData" />
+          <EntitySet Name="BusData" EntityType="BusDBModel.BusData" />
+          <EntitySet Name="BusDriverData" EntityType="BusDBModel.BusDriverData" />
+          <EntitySet Name="Buses" EntityType="BusDBModel.Buses" />
+          <EntitySet Name="BusPositions" EntityType="BusDBModel.BusPositions" />
+          <EntitySet Name="CarData" EntityType="BusDBModel.CarData" />
+          <EntitySet Name="SimulatedBus" EntityType="BusDBModel.SimulatedBus" />
+          <AssociationSet Name="FK_BusData_Buses" Association="BusDBModel.FK_BusData_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="BusData" EntitySet="BusData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusDriverData_Buses" Association="BusDBModel.FK_BusDriverData_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="BusDriverData" EntitySet="BusDriverData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusPositions_Buses" Association="BusDBModel.FK_BusPositions_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="BusPositions" EntitySet="BusPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarData_Buses" Association="BusDBModel.FK_CarData_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="CarData" EntitySet="CarData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SimulatedBus_Buses" Association="BusDBModel.FK_SimulatedBus_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="SimulatedBus" EntitySet="SimulatedBus" />
+          </AssociationSet>
+          <FunctionImport Name="arrivalTime">
+            <Parameter Name="busID" Mode="In" Type="String" />
+            <Parameter Name="stationID" Mode="In" Type="Int32" />
+            <Parameter Name="time_needed" Mode="InOut" Type="Time" />
+          </FunctionImport>
+          <FunctionImport Name="simulateBus">
+          <Parameter Name="busID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="stationSchedule">
+          <Parameter Name="stationID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="References">
           <Key>
@@ -264,35 +441,162 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <Property Name="duration" Type="Int32" Nullable="false" />
           <Property Name="dateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="ActualData">
+        <EntityType Name="BusData">
           <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="BusNr" />
-            <PropertyRef Name="LastStation" />
-            <PropertyRef Name="Time" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BusNr" Type="Int32" Nullable="false" />
-          <Property Name="LastStation" Type="Int32" Nullable="false" />
-          <Property Name="Time" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Actual_Longitude" Type="Double" Nullable="false" />
+          <Property Name="Actual_Latitude" Type="Double" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Actual_Speed" Type="Double" Nullable="false" />
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buses" Relationship="BusDBModel.FK_BusData_Buses" FromRole="BusData" ToRole="Buses" />
         </EntityType>
+        <EntityType Name="BusDriverData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Position_Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Speed" Type="Double" Nullable="false" />
+          <Property Name="Speed_Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Direction" Type="Int32" Nullable="false" />
+          <Property Name="Accel_x" Type="Double" Nullable="false" />
+          <Property Name="Accel_y" Type="Double" Nullable="false" />
+          <Property Name="Accel_z" Type="Double" Nullable="false" />
+          <Property Name="Gyro_x" Type="Double" Nullable="false" />
+          <Property Name="Gyro_y" Type="Double" Nullable="false" />
+          <Property Name="Gyro_z" Type="Double" Nullable="false" />
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Trace_Match" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="BusDBModel.FK_BusDriverData_Buses" FromRole="BusDriverData" ToRole="Buses" />
+        </EntityType>
+        <EntityType Name="Buses">
+          <Key>
+            <PropertyRef Name="BusId" />
+          </Key>
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BusData" Relationship="BusDBModel.FK_BusData_Buses" FromRole="Buses" ToRole="BusData" />
+          <NavigationProperty Name="BusDriverData" Relationship="BusDBModel.FK_BusDriverData_Buses" FromRole="Buses" ToRole="BusDriverData" />
+          <NavigationProperty Name="BusPositions" Relationship="BusDBModel.FK_BusPositions_Buses" FromRole="Buses" ToRole="BusPositions" />
+          <NavigationProperty Name="CarData" Relationship="BusDBModel.FK_CarData_Buses" FromRole="Buses" ToRole="CarData" />
+          <NavigationProperty Name="SimulatedBus" Relationship="BusDBModel.FK_SimulatedBus_Buses" FromRole="Buses" ToRole="SimulatedBus" />
+        </EntityType>
+        <EntityType Name="BusPositions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Datapoints_nearby" Type="Int32" />
+          <NavigationProperty Name="Buses" Relationship="BusDBModel.FK_BusPositions_Buses" FromRole="BusPositions" ToRole="Buses" />
+        </EntityType>
+        <EntityType Name="CarData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Position_Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Speed" Type="Double" Nullable="false" />
+          <Property Name="Speed_Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Direction" Type="Int32" Nullable="false" />
+          <Property Name="Accel_x" Type="Double" Nullable="false" />
+          <Property Name="Accel_y" Type="Double" Nullable="false" />
+          <Property Name="Accel_z" Type="Double" Nullable="false" />
+          <Property Name="Gyro_x" Type="Double" Nullable="false" />
+          <Property Name="Gyro_y" Type="Double" Nullable="false" />
+          <Property Name="Gyro_z" Type="Double" Nullable="false" />
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Trace_Match" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="BusDBModel.FK_CarData_Buses" FromRole="CarData" ToRole="Buses" />
+        </EntityType>
+        <EntityType Name="SimulatedBus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastCheckin" Type="Int32" Nullable="false" />
+          <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BusId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buses" Relationship="BusDBModel.FK_SimulatedBus_Buses" FromRole="SimulatedBus" ToRole="Buses" />
+        </EntityType>
+        <Association Name="FK_BusData_Buses">
+          <End Type="BusDBModel.Buses" Role="Buses" Multiplicity="1" />
+          <End Type="BusDBModel.BusData" Role="BusData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="BusData">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusDriverData_Buses">
+          <End Type="BusDBModel.Buses" Role="Buses" Multiplicity="1" />
+          <End Type="BusDBModel.BusDriverData" Role="BusDriverData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="BusDriverData">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusPositions_Buses">
+          <End Type="BusDBModel.Buses" Role="Buses" Multiplicity="1" />
+          <End Type="BusDBModel.BusPositions" Role="BusPositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="BusPositions">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarData_Buses">
+          <End Type="BusDBModel.Buses" Role="Buses" Multiplicity="1" />
+          <End Type="BusDBModel.CarData" Role="CarData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="CarData">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SimulatedBus_Buses">
+          <End Type="BusDBModel.Buses" Role="Buses" Multiplicity="1" />
+          <End Type="BusDBModel.SimulatedBus" Role="SimulatedBus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="BusId" />
+            </Principal>
+            <Dependent Role="SimulatedBus">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BusDBModelStoreContainer" CdmEntityContainer="BusDBEntities1">
-          <EntitySetMapping Name="Bus">
-            <EntityTypeMapping TypeName="BusDBModel.Bus">
-              <MappingFragment StoreEntitySet="Bus">
-                <ScalarProperty Name="BusId" ColumnName="BusId" />
-                <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
-                <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
-                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
-                <ScalarProperty Name="BusName" ColumnName="BusName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BusTrace">
             <EntityTypeMapping TypeName="BusDBModel.BusTrace">
               <MappingFragment StoreEntitySet="BusTrace">
@@ -318,6 +622,7 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
           <EntitySetMapping Name="Measurements">
             <EntityTypeMapping TypeName="BusDBModel.Measurements">
               <MappingFragment StoreEntitySet="Measurements">
+                <ScalarProperty Name="Trace_Match" ColumnName="Trace_Match" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BusId" ColumnName="BusId" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
@@ -379,16 +684,95 @@ warning 6002: The table/view 'BusDB.dbo.ActualData' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ActualData">
-            <EntityTypeMapping TypeName="BusDBModel.ActualData">
-              <MappingFragment StoreEntitySet="ActualData">
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="LastStation" ColumnName="LastStation" />
-                <ScalarProperty Name="BusNr" ColumnName="BusNr" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+          <EntitySetMapping Name="BusData">
+            <EntityTypeMapping TypeName="BusDBModel.BusData">
+              <MappingFragment StoreEntitySet="BusData">
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Actual_Speed" ColumnName="Actual_Speed" />
+                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+                <ScalarProperty Name="Actual_Latitude" ColumnName="Actual_Latitude" />
+                <ScalarProperty Name="Actual_Longitude" ColumnName="Actual_Longitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BusDriverData">
+            <EntityTypeMapping TypeName="BusDBModel.BusDriverData">
+              <MappingFragment StoreEntitySet="BusDriverData">
+                <ScalarProperty Name="Trace_Match" ColumnName="Trace_Match" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Gyro_z" ColumnName="Gyro_z" />
+                <ScalarProperty Name="Gyro_y" ColumnName="Gyro_y" />
+                <ScalarProperty Name="Gyro_x" ColumnName="Gyro_x" />
+                <ScalarProperty Name="Accel_z" ColumnName="Accel_z" />
+                <ScalarProperty Name="Accel_y" ColumnName="Accel_y" />
+                <ScalarProperty Name="Accel_x" ColumnName="Accel_x" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Speed_Accuracy" ColumnName="Speed_Accuracy" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Position_Accuracy" ColumnName="Position_Accuracy" />
+                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="BusDBModel.Buses">
+              <MappingFragment StoreEntitySet="Buses">
+                <ScalarProperty Name="BusName" ColumnName="BusName" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusPositions">
+            <EntityTypeMapping TypeName="BusDBModel.BusPositions">
+              <MappingFragment StoreEntitySet="BusPositions">
+                <ScalarProperty Name="Datapoints_nearby" ColumnName="Datapoints_nearby" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarData">
+            <EntityTypeMapping TypeName="BusDBModel.CarData">
+              <MappingFragment StoreEntitySet="CarData">
+                <ScalarProperty Name="Trace_Match" ColumnName="Trace_Match" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Gyro_z" ColumnName="Gyro_z" />
+                <ScalarProperty Name="Gyro_y" ColumnName="Gyro_y" />
+                <ScalarProperty Name="Gyro_x" ColumnName="Gyro_x" />
+                <ScalarProperty Name="Accel_z" ColumnName="Accel_z" />
+                <ScalarProperty Name="Accel_y" ColumnName="Accel_y" />
+                <ScalarProperty Name="Accel_x" ColumnName="Accel_x" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Speed_Accuracy" ColumnName="Speed_Accuracy" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Position_Accuracy" ColumnName="Position_Accuracy" />
+                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SimulatedBus">
+            <EntityTypeMapping TypeName="BusDBModel.SimulatedBus">
+              <MappingFragment StoreEntitySet="SimulatedBus">
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="Measurement_Timestamp" ColumnName="Measurement_Timestamp" />
+                <ScalarProperty Name="LastCheckin" ColumnName="LastCheckin" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="arrivalTime" FunctionName="BusDBModel.Store.arrivalTime" />
+          <FunctionImportMapping FunctionImportName="simulateBus" FunctionName="BusDBModel.Store.simulateBus" />
+          <FunctionImportMapping FunctionImportName="stationSchedule" FunctionName="BusDBModel.Store.stationSchedule" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

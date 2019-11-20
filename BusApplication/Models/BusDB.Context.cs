@@ -12,6 +12,8 @@ namespace BusApplication.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BusDBEntities1 : DbContext
     {
@@ -25,7 +27,6 @@ namespace BusApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bus> Bus { get; set; }
         public virtual DbSet<BusTrace> BusTrace { get; set; }
         public virtual DbSet<Line> Line { get; set; }
         public virtual DbSet<Measurements> Measurements { get; set; }
@@ -33,6 +34,42 @@ namespace BusApplication.Models
         public virtual DbSet<References> References { get; set; }
         public virtual DbSet<Timetable> Timetable { get; set; }
         public virtual DbSet<MeasuredData> MeasuredData { get; set; }
-        public virtual DbSet<ActualData> ActualData { get; set; }
+        public virtual DbSet<BusData> BusData { get; set; }
+        public virtual DbSet<BusDriverData> BusDriverData { get; set; }
+        public virtual DbSet<Buses> Buses { get; set; }
+        public virtual DbSet<BusPositions> BusPositions { get; set; }
+        public virtual DbSet<CarData> CarData { get; set; }
+        public virtual DbSet<SimulatedBus> SimulatedBus { get; set; }
+    
+        public virtual int arrivalTime(string busID, Nullable<int> stationID, ObjectParameter time_needed)
+        {
+            var busIDParameter = busID != null ?
+                new ObjectParameter("busID", busID) :
+                new ObjectParameter("busID", typeof(string));
+    
+            var stationIDParameter = stationID.HasValue ?
+                new ObjectParameter("stationID", stationID) :
+                new ObjectParameter("stationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("arrivalTime", busIDParameter, stationIDParameter, time_needed);
+        }
+    
+        public virtual int simulateBus(string busID)
+        {
+            var busIDParameter = busID != null ?
+                new ObjectParameter("busID", busID) :
+                new ObjectParameter("busID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("simulateBus", busIDParameter);
+        }
+    
+        public virtual int stationSchedule(Nullable<int> stationID)
+        {
+            var stationIDParameter = stationID.HasValue ?
+                new ObjectParameter("stationID", stationID) :
+                new ObjectParameter("stationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("stationSchedule", stationIDParameter);
+        }
     }
 }
