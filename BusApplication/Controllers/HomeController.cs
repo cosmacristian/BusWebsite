@@ -1,6 +1,7 @@
 ﻿using BusApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,7 +10,7 @@ namespace BusApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BusDBEntities1 _dbcontext = new BusDBEntities1();
+        private readonly BusDBlatestEntities _dbcontext = new BusDBlatestEntities();
         public ActionResult Index()
         {
             return View();
@@ -26,7 +27,28 @@ namespace BusApplication.Controllers
         public ActionResult Map()
         {
             ViewBag.Message = "Your contact page.";
-            ViewBag.Bus = _dbcontext.BusPositions.ToList();
+            ViewBag.BusInfo = _dbcontext.Buses.ToList();
+            var temp = (from p in _dbcontext.BusPositions
+             select new
+             {
+                 Id = p.Id,
+                 BusId = p.BusId,
+                 Latitude = p.Latitude,
+                 Longitude = p.Longitude,
+                 BusName = p.Buses.BusName
+             }).ToList();
+            List<BusPositionViewModel> posList = new List<BusPositionViewModel>();
+            foreach(var i in temp)
+            {
+                BusPositionViewModel o = new BusPositionViewModel();
+                o.Id = i.Id;
+                o.BusId = i.BusId;
+                o.Latitude = i.Latitude;
+                o.Longitude = i.Longitude;
+                o.BusName = i.BusName;
+                posList.Add(o);
+            }
+            ViewBag.Bus = posList;
             ViewBag.BusTrace = _dbcontext.BusTrace.ToList();
             ViewBag.Stations = _dbcontext.Station.ToList();
             ViewBag.Line = _dbcontext.Line.ToList();

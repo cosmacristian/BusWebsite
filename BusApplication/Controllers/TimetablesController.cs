@@ -12,7 +12,7 @@ namespace BusApplication.Controllers
 {
     public class TimetablesController : Controller
     {
-        private BusDBEntities1 db = new BusDBEntities1();
+        private BusDBlatestEntities db = new BusDBlatestEntities();
 
         // GET: Timetables
         public ActionResult Index()

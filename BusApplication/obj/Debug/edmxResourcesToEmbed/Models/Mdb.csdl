@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BusDBlatestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BusData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Actual_Longitude" Type="Double" Nullable="false" />
+    <Property Name="Actual_Latitude" Type="Double" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Actual_Speed" Type="Double" Nullable="false" />
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_BusData_Buses" FromRole="BusData" ToRole="Buses" />
+  </EntityType>
+  <EntityType Name="BusDriverData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Position_Accuracy" Type="Double" Nullable="false" />
+    <Property Name="Speed" Type="Double" Nullable="false" />
+    <Property Name="Speed_Accuracy" Type="Double" Nullable="false" />
+    <Property Name="Direction" Type="Int32" Nullable="false" />
+    <Property Name="Accel_x" Type="Double" Nullable="false" />
+    <Property Name="Accel_y" Type="Double" Nullable="false" />
+    <Property Name="Accel_z" Type="Double" Nullable="false" />
+    <Property Name="Gyro_x" Type="Double" Nullable="false" />
+    <Property Name="Gyro_y" Type="Double" Nullable="false" />
+    <Property Name="Gyro_z" Type="Double" Nullable="false" />
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Trace_Match" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_BusDriverData_Buses" FromRole="BusDriverData" ToRole="Buses" />
+  </EntityType>
+  <EntityType Name="Buses">
+    <Key>
+      <PropertyRef Name="BusId" />
+    </Key>
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BusData" Relationship="Self.FK_BusData_Buses" FromRole="Buses" ToRole="BusData" />
+    <NavigationProperty Name="BusDriverData" Relationship="Self.FK_BusDriverData_Buses" FromRole="Buses" ToRole="BusDriverData" />
+    <NavigationProperty Name="BusPositions" Relationship="Self.FK_BusPositions_Buses" FromRole="Buses" ToRole="BusPositions" />
+    <NavigationProperty Name="CarData" Relationship="Self.FK_CarData_Buses" FromRole="Buses" ToRole="CarData" />
+    <NavigationProperty Name="SimulatedBus" Relationship="Self.FK_SimulatedBus_Buses" FromRole="Buses" ToRole="SimulatedBus" />
+  </EntityType>
+  <EntityType Name="BusPositions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Datapoints_nearby" Type="Int32" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_BusPositions_Buses" FromRole="BusPositions" ToRole="Buses" />
+  </EntityType>
+  <EntityType Name="BusTrace">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="speed" Type="Double" />
+  </EntityType>
+  <EntityType Name="CarData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Position_Accuracy" Type="Double" Nullable="false" />
+    <Property Name="Speed" Type="Double" Nullable="false" />
+    <Property Name="Speed_Accuracy" Type="Double" Nullable="false" />
+    <Property Name="Direction" Type="Int32" Nullable="false" />
+    <Property Name="Accel_x" Type="Double" Nullable="false" />
+    <Property Name="Accel_y" Type="Double" Nullable="false" />
+    <Property Name="Accel_z" Type="Double" Nullable="false" />
+    <Property Name="Gyro_x" Type="Double" Nullable="false" />
+    <Property Name="Gyro_y" Type="Double" Nullable="false" />
+    <Property Name="Gyro_z" Type="Double" Nullable="false" />
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Trace_Match" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_CarData_Buses" FromRole="CarData" ToRole="Buses" />
+  </EntityType>
+  <EntityType Name="Line">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="LineID" Type="Int32" Nullable="false" />
+    <Property Name="StationID" Type="Int32" Nullable="false" />
+    <Property Name="StationNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Station" Relationship="Self.FK_Line_Station" FromRole="Line" ToRole="Station" />
+  </EntityType>
+  <EntityType Name="MeasuredData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="From" Type="Int32" Nullable="false" />
+    <Property Name="To" Type="Int32" Nullable="false" />
+    <Property Name="duration" Type="Int32" Nullable="false" />
+    <Property Name="dateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Measurements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Position_Accuracy" Type="Double" Nullable="false" />
+    <Property Name="Speed" Type="Double" Nullable="false" />
+    <Property Name="Speed_Accuracy" Type="Double" Nullable="false" />
+    <Property Name="Direction" Type="Int32" Nullable="false" />
+    <Property Name="Accel_x" Type="Double" Nullable="false" />
+    <Property Name="Accel_y" Type="Double" Nullable="false" />
+    <Property Name="Accel_z" Type="Double" Nullable="false" />
+    <Property Name="Gyro_x" Type="Double" Nullable="false" />
+    <Property Name="Gyro_y" Type="Double" Nullable="false" />
+    <Property Name="Gyro_z" Type="Double" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Trace_Match" Type="Int32" />
+  </EntityType>
+  <EntityType Name="References">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="From" Type="Int32" Nullable="false" />
+    <Property Name="To" Type="Int32" Nullable="false" />
+    <Property Name="duration" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="intervalTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="SimulatedBus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastCheckin" Type="Int32" Nullable="false" />
+    <Property Name="Measurement_Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BusId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Buses" Relationship="Self.FK_SimulatedBus_Buses" FromRole="SimulatedBus" ToRole="Buses" />
+  </EntityType>
+  <EntityType Name="Station">
+    <Key>
+      <PropertyRef Name="StationID" />
+    </Key>
+    <Property Name="StationID" Type="Int32" Nullable="false" />
+    <Property Name="StationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Line" Relationship="Self.FK_Line_Station" FromRole="Station" ToRole="Line" />
+  </EntityType>
+  <EntityType Name="Timetable">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="busNr" Type="Int32" Nullable="false" />
+    <Property Name="startTime" Type="Time" Nullable="false" Precision="0" />
+    <Property Name="stationID" Type="Int32" Nullable="false" />
+    <Property Name="weekday" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BusData_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="BusData" Type="Self.BusData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="BusData">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusDriverData_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="BusDriverData" Type="Self.BusDriverData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="BusDriverData">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusPositions_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="BusPositions" Type="Self.BusPositions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="BusPositions">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarData_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="CarData" Type="Self.CarData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="CarData">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SimulatedBus_Buses">
+    <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+    <End Role="SimulatedBus" Type="Self.SimulatedBus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buses">
+        <PropertyRef Name="BusId" />
+      </Principal>
+      <Dependent Role="SimulatedBus">
+        <PropertyRef Name="BusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Line_Station">
+    <End Role="Station" Type="Self.Station" Multiplicity="1" />
+    <End Role="Line" Type="Self.Line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Station">
+        <PropertyRef Name="StationID" />
+      </Principal>
+      <Dependent Role="Line">
+        <PropertyRef Name="StationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BusDBlatestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BusData" EntityType="Self.BusData" />
+    <EntitySet Name="BusDriverData" EntityType="Self.BusDriverData" />
+    <EntitySet Name="Buses" EntityType="Self.Buses" />
+    <EntitySet Name="BusPositions" EntityType="Self.BusPositions" />
+    <EntitySet Name="BusTrace" EntityType="Self.BusTrace" />
+    <EntitySet Name="CarData" EntityType="Self.CarData" />
+    <EntitySet Name="Line" EntityType="Self.Line" />
+    <EntitySet Name="MeasuredData" EntityType="Self.MeasuredData" />
+    <EntitySet Name="Measurements" EntityType="Self.Measurements" />
+    <EntitySet Name="References" EntityType="Self.References" />
+    <EntitySet Name="SimulatedBus" EntityType="Self.SimulatedBus" />
+    <EntitySet Name="Station" EntityType="Self.Station" />
+    <EntitySet Name="Timetable" EntityType="Self.Timetable" />
+    <AssociationSet Name="FK_BusData_Buses" Association="Self.FK_BusData_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="BusData" EntitySet="BusData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusDriverData_Buses" Association="Self.FK_BusDriverData_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="BusDriverData" EntitySet="BusDriverData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusPositions_Buses" Association="Self.FK_BusPositions_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="BusPositions" EntitySet="BusPositions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarData_Buses" Association="Self.FK_CarData_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="CarData" EntitySet="CarData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SimulatedBus_Buses" Association="Self.FK_SimulatedBus_Buses">
+      <End Role="Buses" EntitySet="Buses" />
+      <End Role="SimulatedBus" EntitySet="SimulatedBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Line_Station" Association="Self.FK_Line_Station">
+      <End Role="Station" EntitySet="Station" />
+      <End Role="Line" EntitySet="Line" />
+    </AssociationSet>
+    <FunctionImport Name="arrivalTime">
+      <Parameter Name="busID" Mode="In" Type="String" />
+      <Parameter Name="stationID" Mode="In" Type="Int32" />
+      <Parameter Name="time_needed" Mode="InOut" Type="Time" />
+    </FunctionImport>
+    <FunctionImport Name="simulateBus">
+      <Parameter Name="busID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stationSchedule">
+      <Parameter Name="stationID" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

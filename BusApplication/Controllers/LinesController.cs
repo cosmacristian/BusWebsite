@@ -12,7 +12,7 @@ namespace BusApplication.Controllers
 {
     public class LinesController : Controller
     {
-        private BusDBEntities1 db = new BusDBEntities1();
+        private BusDBlatestEntities db = new BusDBlatestEntities();
 
         // GET: Lines
         public ActionResult Index()

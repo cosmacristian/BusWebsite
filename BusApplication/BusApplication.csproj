@@ -147,90 +147,81 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ActualDatasController.cs" />
+    <Compile Include="Controllers\BusDatasController.cs" />
+    <Compile Include="Controllers\BusDriverDatasController.cs" />
+    <Compile Include="Controllers\BusesController.cs" />
+    <Compile Include="Controllers\BusPositionsController.cs" />
     <Compile Include="Controllers\BusTracesController.cs" />
+    <Compile Include="Controllers\CarDatasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinesController.cs" />
     <Compile Include="Controllers\MeasuredDatasController.cs" />
+    <Compile Include="Controllers\MeasurementsController.cs" />
     <Compile Include="Controllers\ReferencesController.cs" />
+    <Compile Include="Controllers\SimulatedBusController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
+    <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Controllers\TimetablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActualData.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\BusData.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BusDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BusDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BusDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BusDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BusDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BusDB.edmx</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BusDriverData.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Buses.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BusPositions.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusPositionViewModel.cs" />
+    <Compile Include="Models\BusTime.cs" />
     <Compile Include="Models\BusTrace.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CarData.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DoubleModelBinder.cs" />
     <Compile Include="Models\Line.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mdb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mdb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mdb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mdb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mdb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\MeasuredData.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Measurements.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\References.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SimulatedBus.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Station.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StationViewModel.cs" />
     <Compile Include="Models\Timetable.cs">
-      <DependentUpon>BusDB.tt</DependentUpon>
+      <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -249,39 +240,15 @@
     <Content Include="Images\bg4.jpg" />
     <Content Include="Images\bg5.jpg" />
     <Content Include="Images\bg6.jpg" />
-    <Content Include="Models\BusDB.Context.tt">
+    <Content Include="Models\Mdb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BusDB.edmx</DependentUpon>
-      <LastGenOutput>BusDB.Context.cs</LastGenOutput>
+      <DependentUpon>Mdb.edmx</DependentUpon>
+      <LastGenOutput>Mdb.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BusDB.tt">
+    <Content Include="Models\Mdb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BusDB.edmx</DependentUpon>
-      <LastGenOutput>BusDB.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ModelDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ModelDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-      <LastGenOutput>ModelDB.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\BusDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BusDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\BusDB.edmx.diagram">
-      <DependentUpon>BusDB.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\ModelDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelDB.edmx.diagram">
-      <DependentUpon>ModelDB.edmx</DependentUpon>
+      <DependentUpon>Mdb.edmx</DependentUpon>
+      <LastGenOutput>Mdb.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -289,6 +256,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Mdb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Mdb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Mdb.edmx.diagram">
+      <DependentUpon>Mdb.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml">
       <SubType>Designer</SubType>
@@ -379,11 +353,6 @@
     <Content Include="Views\MeasuredDatas\Details.cshtml" />
     <Content Include="Views\MeasuredDatas\Edit.cshtml" />
     <Content Include="Views\MeasuredDatas\Index.cshtml" />
-    <Content Include="Views\ActualDatas\Create.cshtml" />
-    <Content Include="Views\ActualDatas\Delete.cshtml" />
-    <Content Include="Views\ActualDatas\Details.cshtml" />
-    <Content Include="Views\ActualDatas\Edit.cshtml" />
-    <Content Include="Views\ActualDatas\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -393,10 +362,46 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\SimulatedBus\Create.cshtml" />
+    <Content Include="Views\SimulatedBus\Delete.cshtml" />
+    <Content Include="Views\SimulatedBus\Details.cshtml" />
+    <Content Include="Views\SimulatedBus\Edit.cshtml" />
+    <Content Include="Views\SimulatedBus\Index.cshtml" />
+    <Content Include="Views\BusPositions\Create.cshtml" />
+    <Content Include="Views\BusPositions\Delete.cshtml" />
+    <Content Include="Views\BusPositions\Details.cshtml" />
+    <Content Include="Views\BusPositions\Edit.cshtml" />
+    <Content Include="Views\BusPositions\Index.cshtml" />
+    <Content Include="Views\BusDatas\Create.cshtml" />
+    <Content Include="Views\BusDatas\Delete.cshtml" />
+    <Content Include="Views\BusDatas\Details.cshtml" />
+    <Content Include="Views\BusDatas\Edit.cshtml" />
+    <Content Include="Views\BusDatas\Index.cshtml" />
+    <Content Include="Views\BusDriverDatas\Create.cshtml" />
+    <Content Include="Views\BusDriverDatas\Delete.cshtml" />
+    <Content Include="Views\BusDriverDatas\Details.cshtml" />
+    <Content Include="Views\BusDriverDatas\Edit.cshtml" />
+    <Content Include="Views\BusDriverDatas\Index.cshtml" />
+    <Content Include="Views\Buses\Create.cshtml" />
+    <Content Include="Views\Buses\Delete.cshtml" />
+    <Content Include="Views\Buses\Details.cshtml" />
+    <Content Include="Views\Buses\Edit.cshtml" />
+    <Content Include="Views\Buses\Index.cshtml" />
+    <Content Include="Views\CarDatas\Create.cshtml" />
+    <Content Include="Views\CarDatas\Delete.cshtml" />
+    <Content Include="Views\CarDatas\Details.cshtml" />
+    <Content Include="Views\CarDatas\Edit.cshtml" />
+    <Content Include="Views\CarDatas\Index.cshtml" />
+    <Content Include="Views\Measurements\Create.cshtml" />
+    <Content Include="Views\Measurements\Delete.cshtml" />
+    <Content Include="Views\Measurements\Details.cshtml" />
+    <Content Include="Views\Measurements\Edit.cshtml" />
+    <Content Include="Views\Measurements\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
+    <Folder Include="Views\Time\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
