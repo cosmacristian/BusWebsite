@@ -8,10 +8,11 @@ namespace BusApplication.Models
     public class BusPositionViewModel
     {
         public int Id;
-        public String BusId;
+        public string BusId;
         public double Latitude;
         public double Longitude;
-        public String BusName;
+        public string BusName;
+        public DateTime Timestamp;
 
         public BusPositionViewModel()
         {

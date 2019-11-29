@@ -35,7 +35,8 @@ namespace BusApplication.Controllers
                  BusId = p.BusId,
                  Latitude = p.Latitude,
                  Longitude = p.Longitude,
-                 BusName = p.Buses.BusName
+                 BusName = p.Buses.BusName,
+                 Timestamp = p.Timestamp
              }).ToList();
             List<BusPositionViewModel> posList = new List<BusPositionViewModel>();
             foreach(var i in temp)
@@ -46,6 +47,7 @@ namespace BusApplication.Controllers
                 o.Latitude = i.Latitude;
                 o.Longitude = i.Longitude;
                 o.BusName = i.BusName;
+                o.Timestamp = i.Timestamp;
                 posList.Add(o);
             }
             ViewBag.Bus = posList;
@@ -55,6 +57,8 @@ namespace BusApplication.Controllers
             ViewBag.Timetable = _dbcontext.Timetable.ToList();
             ViewBag.References = _dbcontext.References.ToList();
             ViewBag.MeasuredData = _dbcontext.MeasuredData.ToList();
+            ViewBag.BusPositions = _dbcontext.BusPositions.ToList();
+
             return View();
         }
     }

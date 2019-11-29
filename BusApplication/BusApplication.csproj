@@ -160,7 +160,6 @@
     <Compile Include="Controllers\ReferencesController.cs" />
     <Compile Include="Controllers\SimulatedBusController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
-    <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Controllers\TimetablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
