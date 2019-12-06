@@ -909,3 +909,4 @@ C:\Users\szilv\Source\Repos\BusWebsite\BusApplication\obj\Debug\BusApplication.c
 C:\Users\szilv\Source\Repos\BusWebsite\BusApplication\obj\Debug\BusApplication.csproj.CopyComplete
 C:\Users\szilv\Source\Repos\BusWebsite\BusApplication\obj\Debug\BusApplication.dll
 C:\Users\szilv\Source\Repos\BusWebsite\BusApplication\obj\Debug\BusApplication.pdb
+D:\Programok\ASP.NET\BusApplication\BusWebsite\BusApplication\obj\Debug\BusApplication.csprojAssemblyReference.cache

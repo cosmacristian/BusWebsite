@@ -356,7 +356,7 @@
             
             var d = b.Timestamp;
             d = d.split(' ');
-            var time = d[3].split(":");
+            var time = d[1].split(":");
             var measureDate = new Date(Number(d[0]), Number(d[1]), Number(d[2]), Number(time[0]), Number(time[1]), Number(time[2]));
 
             //5 minutes = 300 000 milliseconds
