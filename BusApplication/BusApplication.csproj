@@ -155,6 +155,7 @@
     <Compile Include="Controllers\CarDatasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinesController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\MeasuredDatasController.cs" />
     <Compile Include="Controllers\MeasurementsController.cs" />
     <Compile Include="Controllers\ReferencesController.cs" />
@@ -185,6 +186,7 @@
       <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DoubleModelBinder.cs" />
+    <Compile Include="Models\EditBusLineViewModel.cs" />
     <Compile Include="Models\Line.cs">
       <DependentUpon>Mdb.tt</DependentUpon>
     </Compile>
@@ -396,6 +398,9 @@
     <Content Include="Views\Measurements\Details.cshtml" />
     <Content Include="Views\Measurements\Edit.cshtml" />
     <Content Include="Views\Measurements\Index.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutMap.cshtml" />
+    <Content Include="Views\Map\EditorTemplates\Station.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

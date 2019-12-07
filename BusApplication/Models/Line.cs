@@ -15,7 +15,7 @@ namespace BusApplication.Models
     public partial class Line
     {
         public int ID { get; set; }
-        public int LineID { get; set; }
+        public string LineID { get; set; }
         public int StationID { get; set; }
         public int StationNr { get; set; }
     

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BusDBlatestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BusDBlatestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BusData">
           <Key>
             <PropertyRef Name="Id" />
@@ -65,6 +65,8 @@
           <Property Name="Latitude" Type="float" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="speed" Type="float" />
+          <Property Name="EndPoint" Type="bit" />
+          <Property Name="OrderNum" Type="int" />
         </EntityType>
         <EntityType Name="CarData">
           <Key>
@@ -92,7 +94,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="LineID" Type="int" Nullable="false" />
+          <Property Name="LineID" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="StationID" Type="int" Nullable="false" />
           <Property Name="StationNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -150,7 +152,7 @@
           <Key>
             <PropertyRef Name="StationID" />
           </Key>
-          <Property Name="StationID" Type="int" Nullable="false" />
+          <Property Name="StationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StationName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Longitude" Type="float" Nullable="false" />
           <Property Name="Latitude" Type="float" Nullable="false" />
@@ -293,8 +295,7 @@
             <End Role="SimulatedBus" EntitySet="SimulatedBus" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BusDBlatestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -366,6 +367,8 @@
           <Property Name="Latitude" Type="Double" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="speed" Type="Double" />
+          <Property Name="EndPoint" Type="Boolean" />
+          <Property Name="OrderNum" Type="Int32" />
         </EntityType>
         <EntityType Name="CarData">
           <Key>
@@ -394,7 +397,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="LineID" Type="Int32" Nullable="false" />
+          <Property Name="LineID" Type="String" Nullable="false" />
           <Property Name="StationID" Type="Int32" Nullable="false" />
           <Property Name="StationNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Station" Relationship="Self.FK_Line_Station" FromRole="Line" ToRole="Station" />
@@ -586,10 +589,10 @@
             <Parameter Name="time_needed" Mode="InOut" Type="Time" />
           </FunctionImport>
           <FunctionImport Name="simulateBus">
-            <Parameter Name="busID" Mode="In" Type="String" />
+          <Parameter Name="busID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="stationSchedule">
-            <Parameter Name="stationID" Mode="In" Type="Int32" />
+          <Parameter Name="stationID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -655,6 +658,8 @@
           <EntitySetMapping Name="BusTrace">
             <EntityTypeMapping TypeName="BusDBlatestModel.BusTrace">
               <MappingFragment StoreEntitySet="BusTrace">
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BusId" ColumnName="BusId" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />

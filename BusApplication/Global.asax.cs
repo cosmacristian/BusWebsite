@@ -17,7 +17,7 @@ namespace BusApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            ModelBinders.Binders.Add(typeof(Double), new DoubleModelBinder());//[typeof(Double)] = new DoubleModelBinder();
+            ModelBinders.Binders[typeof(Double)] = new DoubleModelBinder();//.Add(typeof(Double), new DoubleModelBinder());//[typeof(Double)] = new DoubleModelBinder();
         }
     }
 }

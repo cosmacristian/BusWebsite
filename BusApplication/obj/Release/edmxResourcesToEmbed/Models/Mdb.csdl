@@ -68,6 +68,8 @@
     <Property Name="Latitude" Type="Double" Nullable="false" />
     <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="speed" Type="Double" />
+    <Property Name="EndPoint" Type="Boolean" />
+    <Property Name="OrderNum" Type="Int32" />
   </EntityType>
   <EntityType Name="CarData">
     <Key>
@@ -96,7 +98,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="LineID" Type="Int32" Nullable="false" />
+    <Property Name="LineID" Type="String" Nullable="false" />
     <Property Name="StationID" Type="Int32" Nullable="false" />
     <Property Name="StationNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="Station" Relationship="Self.FK_Line_Station" FromRole="Line" ToRole="Station" />

@@ -60,6 +60,8 @@
     <Property Name="Latitude" Type="float" Nullable="false" />
     <Property Name="Timestamp" Type="datetime" Nullable="false" />
     <Property Name="speed" Type="float" />
+    <Property Name="EndPoint" Type="bit" />
+    <Property Name="OrderNum" Type="int" />
   </EntityType>
   <EntityType Name="CarData">
     <Key>
@@ -87,7 +89,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="LineID" Type="int" Nullable="false" />
+    <Property Name="LineID" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="StationID" Type="int" Nullable="false" />
     <Property Name="StationNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
@@ -145,7 +147,7 @@
     <Key>
       <PropertyRef Name="StationID" />
     </Key>
-    <Property Name="StationID" Type="int" Nullable="false" />
+    <Property Name="StationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StationName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Longitude" Type="float" Nullable="false" />
     <Property Name="Latitude" Type="float" Nullable="false" />
