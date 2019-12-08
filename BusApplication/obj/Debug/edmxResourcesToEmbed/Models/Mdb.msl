@@ -58,6 +58,8 @@
     <EntitySetMapping Name="BusTrace">
       <EntityTypeMapping TypeName="BusDBlatestModel.BusTrace">
         <MappingFragment StoreEntitySet="BusTrace">
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BusId" ColumnName="BusId" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />

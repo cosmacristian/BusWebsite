@@ -20,5 +20,7 @@ namespace BusApplication.Models
         public double Latitude { get; set; }
         public System.DateTime Timestamp { get; set; }
         public Nullable<double> speed { get; set; }
+        public Nullable<bool> EndPoint { get; set; }
+        public Nullable<int> OrderNum { get; set; }
     }
 }

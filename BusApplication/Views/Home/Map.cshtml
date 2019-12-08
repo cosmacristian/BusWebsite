@@ -1,11 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="hu">
 <head>
-   
+
     <style>
         .box {
             position: absolute;
-            float:left;
+            float: left;
+            margin: 0;
+            height: 70%;
+            width: 25%;
         }
 
             .box select {
@@ -32,7 +35,8 @@
                 background-color: rgba(255, 255, 255, 0.1);
                 pointer-events: none;
             }
-                */
+             */
+
             .box:hover::before {
                 color: rgba(255, 255, 255, 0.6);
                 background-color: rgba(255, 255, 255, 0.2);
@@ -43,11 +47,18 @@
             }
 
         #mapid {
-            height: 600px;
+            position: absolute;
+            width: 80%;
+            height: 93%;
+            border: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            z-index: 999999;
         }
 
-        .hidden{
-            display:none;
+        .hidden {
+            display: none;
         }
 
         .lista {
@@ -58,13 +69,35 @@
             overflow: hidden;
             background-color: #333;
         }
+        #linelist, #stationlist, #buslist {
+            height: 123%;
+            width: 70%;
+            overflow-y: scroll;
+        }
+
+        #listaelem a {
+            display: inline;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        #listaelem a:hover:not(.active) {
+            background-color: #71B6E6;
+            color: black;
+        }
+
+         #listaelem a:hover, a:focus {
+                color: white;
+         }
 
         #elem {
             float: left;
+            display: inline;
         }
 
             #elem a {
-                display: block;
+                display: inline-block;
                 color: white;
                 text-align: center;
                 padding: 14px 16px;
@@ -72,7 +105,7 @@
             }
 
                 #elem a:hover:not(.active) {
-                    background-color: #71B6E6;
+                    background-color: #75B5E4;
                     color: black;
                 }
 
@@ -80,29 +113,57 @@
                     color: white;
                 }
 
-        #buses{
-            position: relative;
+        #buses {
+            position: absolute;
             font-family: 'Lucida Sans';
             font-size: 20px;
-            background-color: #71B6E6;
-            color:white;
-            width: 200px;
-            height: 40px;
+            background-color: #333;
+            color: white;
+            margin: 0;
+            width: 17.7%;
+            height: 5%;
+            bottom: 1%;
+            left: 1.8%;
         }
+
         #busStations {
-            position: relative;
+            position: absolute;
             font-family: 'Lucida Sans';
             font-size: 20px;
-            background-color: #71B6E6;
-            color:white;
-            width: 200px;
-            height: 40px;
+            background-color: #333;
+            color: white;
+            margin:0;
+            width: 17.7%;
+            height: 5%;
+            bottom: 1%;
+            left: 20%;
+        }
+        #timetable {
+            position: absolute;
+            font-family: 'Lucida Sans';
+            font-size: 20px;
+            background-color: #333;
+            color: white;
+            margin:0;
+            width: 17.7%;
+            height: 5%;
+            bottom: 1%;
+            left: 38.3%;
+        }
+        #contact {
+            position: absolute;
+            font-family: 'Lucida Sans';
+            font-size: 20px;
+            background-color: #333;
+            color: white;
+            margin: 0;
+            width: 8%;
+            height: 5%;
+            bottom: 1%;
+            left: 91.5%;
         }
 
-
-          
-
-
+  
     </style>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -120,34 +181,52 @@
 </head>
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <ul class="lista">
+    <div class="container">
+        <div class="left" style="position:inherit">
+            <div>
+                <ul class="lista">
 
-     
-        <li id="elem"><a id="Bus" href="#">Bus</a></li>
-        <li id="elem"><a id="stations" href="#">Stations</a></li>
-        <li id="elem"><a id="lines" href="#">Lines</a></li>
-        <li id="elem">
-            <div class="box">
-                <select class="hidden" id="dropdown" style="background-color:#9C9C9C">
-                    <option title="Please select a bus." value="-1">Routes</option>
-                    @foreach (var bus in ViewBag.BusInfo)
-                    {
-                        @:<option title="@bus.BusId" value="@bus.BusId">@bus.BusName</option>
-                    }
-                </select>
+
+                    <li id="elem"><a id="Bus" href="#">Bus</a></li>
+                    <li id="elem"><a id="stations" href="#">Stations</a></li>
+                    <li id="elem"><a id="lines" href="#">Lines</a></li>
+                    <li id="elem">
+
+                    </li>
+                </ul>
             </div>
-        </li>
-    </ul>
+            <div>
+                <div class="box">
+                    @*<select class="hidden" id="dropdown" style="background-color:#9C9C9C">
+            <option title="Please select a bus." value="-1">Routes</option>
+            @foreach (var bus in ViewBag.BusInfo)
+            {
+                @:<option title="@bus.BusId" value="@bus.BusId">@bus.BusId - @bus.BusName</option>
+            }
+        </select>*@
+                    <ul style="background-color:#9C9C9C; max-width:70%; display:none" class="lista" id="linelist">
+                        @foreach (var bus in ViewBag.BusInfo)
+                        {
+                            @:<li id="listaelem" title="@bus.BusId" value="@bus.BusId"><a id="@bus.BusId" href="#">@bus.BusId - @bus.BusName</a></li>
+                        }
+                    </ul>
+                    <ul style="background-color:#9C9C9C; max-width:70%" class="lista" id="stationlist">
+                        @foreach (var station in ViewBag.Stations)
+                        {
+                            @:<li id="listaelem" title="@station.StationID" value="@station.StationID"><a id="@station.StationID" href="#">@station.StationID - @station.StationName</a></li>
+                        }
+                    </ul>
+                    <ul style="background-color:#9C9C9C; max-width:70%; display:none" class="lista" id="buslist">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="mapid" class="right"></div>
 
 
-
-
-    @* Slidebar *@
-
-
-
-    <div id="mapid"></div>
-
+    </div>
     <div>
         <select required id="buses" onchange="changeStations()">
             <option value="" disabled selected> Select a bus </option>
@@ -157,8 +236,9 @@
             <option value="" disabled selected> Select a station </option>
         </select>
         <b id="timetable"></b>
+        <b id="contact">@Html.ActionLink("Contact Us", "About", "Home", null, new { @class = "MenuButtons" })</b>
     </div>
-    
+
 
     <script>
 
@@ -198,9 +278,12 @@
                 if (mymap.hasLayer(LineLayer)) {
                     mymap.removeLayer(LineLayer);
                 }
-                mymap.addLayer(BusLayer);
+                mymap.addLayer(BusLayer, { Icon: busIcon });
                 $(this).addClass('selected');
             }
+            document.getElementById('linelist').style.display = 'none';
+            document.getElementById('buslist').style.display = '';
+            document.getElementById('stationlist').style.display = 'none';
         });
         //Kezeli a StationLayert
         var elm = document.getElementById("stations");
@@ -218,6 +301,9 @@
                 mymap.addLayer(StationsLayer);
                 $(this).addClass('selected');
             }
+            document.getElementById('linelist').style.display = 'none';
+            document.getElementById('buslist').style.display = 'none';
+            document.getElementById('stationlist').style.display = '';
         });
         //Kezeli a LineLayert
         var elm = document.getElementById("lines");
@@ -242,14 +328,19 @@
                     mymap.removeLayer(LineLayer);
                 }
             }
-        });
+            document.getElementById('linelist').style.display = '';
+            document.getElementById('stationlist').style.display = 'none';
+            document.getElementById('buslist').style.display = 'none';
 
-        var elm = document.getElementById("dropdown");
-        elm.onchange = (function (event) {
+        });
+        var lineMarkers = [];
+        var elm = document.getElementById("linelist");
+        elm.onclick = (function (event) {
             if (mymap.hasLayer(LineLayer)) {
                 mymap.removeLayer(LineLayer);
+                mymap.removeLayer(lineStationLayer);
             }
-            var selectedid = $(this).val();//off
+            var selectedid = event.target.id//$(this).val();//off
             if (selectedid != '-1') {
                 var temp = tracesList.map(function (s) {
                     if (s.BusId == selectedid) { return [s.Latitude, s.Longitude] } else { return null };
@@ -262,15 +353,43 @@
                         color: 'blue',
                         weight: 3,
                         opacity: 0.5,
-                        smoothFactor: 1
+                        smoothFactor: 5
                     });
                     var actbus = tracesList.find(function (element) {
                         return element.BusId == selectedid;
                     });
                     var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
 
+
+
+                    //var markers = [];
+                    //var markersLayer = new L.LayerGroup();
+
+                    var stationForLine = [];
+                    lines.forEach(line => {
+                        if (selectedid == line.LineId) {
+                            stationForLine.push(line);
+                        }
+                    });
+                    var points = [];
+                    stationForLine.forEach(e => {
+                        points.push(stationList.find(x => x.StationID === e.StationID));
+                    })
+                    linemarkers = points.map(e => {
+                        return L.marker([e.Latitude, e.Longitude]).bindPopup(e.StationName);
+                        //marker = L.marker([e.Latitude, e.Longitude]).addTo(mymap);
+                        //marker.bindPopup(e.StationName);
+                    })
+                    //lineMarkers.forEach(e => e.addTo(mymap))
+                    var lineStationLayer = L.layerGroup(lineMarkers);
+                    //lineStationLayer.addLayer(mymap);
                     LineLayer = L.layerGroup([firstpolyline, marked]);
+                    //adding the LINE layer to map
                     mymap.addLayer(LineLayer);
+                    mymap.addLayer(lineStationLayer);
+                    console.log(points);
+
+
                 }
             }
         });
@@ -353,7 +472,7 @@
             var currentDate = new Date();
             var currentHour = currentDate.getHours();
             var currentMinute = currentDate.getMinutes();
-            
+
             var d = b.Timestamp;
             d = d.split(' ');
             var time = d[3].split(":");
@@ -365,30 +484,47 @@
             }
         })
 
-
+        var buslist = document.getElementById('buslist');
+        buslist.innerHTML = '';
+        bList.forEach(e => {
+            buslist.innerHTML += "<li id=listaelem title=" + e.BusId + " value=" + e.BusId + "><a id=" + e.BusId + " href=" + "#"+ ">" + e.BusId + " - " + e.BusName + "</a></li>";
+        })
         var temp = bList.map(function (s) {
-           
-                return L.marker([s.Latitude, s.Longitude]).bindPopup("<b>" + s.BusId + "</b><br>" + s.BusName);
-         
+
+            return L.marker([s.Latitude, s.Longitude]).bindPopup("<b>" + s.BusId + "</b><br>" + s.BusName);
+
         });
 
 
         var BusLayer = L.layerGroup(temp);
 
 
-        var greenIcon = new L.Icon({
-            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
+        var stationIcon = new L.Icon({
+            iconUrl: 'https://icon-library.net/images/google-maps-bus-icon/google-maps-bus-icon-5.jpg',
+            iconSize: [25, 31],
+            iconAnchor: [12, 31],
+            popupAnchor: [1, -34]
+        });
+
+        var busIcon = new L.Icon({
+            iconUrl: 'https://library.kissclipart.com/20180829/ixe/kissclipart-bus-icon-blue-clipart-bus-aec-routemaster-computer-f1197258ead899e5.jpg',
+            iconSize: [25, 31],
+            iconAnchor: [12, 31],
+            popupAnchor: [1, -34]
+        });
+
+        var busIcon1 = new L.icon({
+            iconUrl: 'https://library.kissclipart.com/20180829/ixe/kissclipart-bus-icon-blue-clipart-bus-aec-routemaster-computer-f1197258ead899e5.jpg',
+            iconSize: [25, 31],
+            iconAnchor: [12, 31],
+            popupAnchor: [1, -34]
         });
 
 
         //Hozzaadja a station nevet a popuphoz
         var temp = stationList.map(function (s) {
-            return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=stationName>' + s.StationName + '</a>' + '<br>' + '<button type=button onClick = btnOnClick() > More</> ' );
+            var busNumbers = getBusNumbersForStation(s.StationID);
+            return L.marker([s.Latitude, s.Longitude], { icon: stationIcon }).bindPopup('<a id=stationName>' + s.StationName + '</a>' + '<br>' + 'Buses: ' + busNumbers.join(', '));
         });
 
         function btnOnClick() {
@@ -548,7 +684,18 @@
                 }
             });
         }
-        
+
+        function getBusNumbersForStation(stationId) {
+            var busNumbers = [];
+            lines.forEach(line => {
+                if (line.StationID == stationId) {
+                    if (busNumbers.indexOf(line.LineId) == -1) {
+                        busNumbers.push(line.LineId);
+                    }
+                }
+            })
+            return busNumbers;
+        }
 
     </script>
 
