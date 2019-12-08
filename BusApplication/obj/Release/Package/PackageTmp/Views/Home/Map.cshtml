@@ -130,7 +130,7 @@
             <div class="box">
                 <select class="hidden" id="dropdown" style="background-color:#9C9C9C">
                     <option title="Please select a bus." value="-1">Routes</option>
-                    @foreach (var bus in ViewBag.Bus)
+                    @foreach (var bus in ViewBag.BusInfo)
                     {
                         @:<option title="@bus.BusId" value="@bus.BusId">@bus.BusName</option>
                     }
@@ -142,20 +142,23 @@
 
 
 
+    @* Slidebar *@
+
+
+
     <div id="mapid"></div>
 
     <div>
-        <select id="buses" onchange="changeStations()">
-            <option value=""> Select a bus </option>
+        <select required id="buses" onchange="changeStations()">
+            <option value="" disabled selected> Select a bus </option>
         </select>
 
-        <select id="busStations" onchange="showTimes()">
-            <option value=""> Select a station </option>
+        <select required id="busStations" onchange="showTime(this)">
+            <option value="" disabled selected> Select a station </option>
         </select>
+        <b id="timetable"></b>
     </div>
-    <div id="timetable">
-        <b>Start times:</b> 
-    </div>
+    
 
     <script>
 
@@ -261,7 +264,7 @@
                         opacity: 0.5,
                         smoothFactor: 1
                     });
-                    var actbus = busList.find(function (element) {
+                    var actbus = tracesList.find(function (element) {
                         return element.BusId == selectedid;
                     });
                     var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
@@ -321,9 +324,14 @@
         var busList = [];
         @foreach (var bus in ViewBag.Bus)
         {
-           @:busList.push({ "BusName": "@bus.BusName", "BusId": "@bus.BusId", "Longitude": parseFloat("@bus.Actual_Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Actual_Latitude".replace(',', '.'))});
+           @:busList.push({ "BusName": "@bus.BusName", "BusId": "@bus.BusId", "Timestamp": "@bus.Timestamp", "Longitude": parseFloat("@bus.Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Latitude".replace(',', '.'))});
         }
 
+        var busInfoList = [];
+        @foreach (var bus in ViewBag.BusInfo)
+        {
+           @:busInfoList.push({ "BusName": "@bus.BusName", "BusId": "@bus.BusId" });@*, "Longitude": parseFloat("@bus.Actual_Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Actual_Latitude".replace(',', '.'))});*@
+        }
         var LineLayer;
 
         /*
@@ -340,8 +348,28 @@
         */
 
 
-        var temp = busList.map(function (s) {
-            return L.marker([s.Latitude, s.Longitude]).bindPopup("<b>" + s.BusId + "</b><br>" + s.BusName);
+        var bList = [];
+        busList.forEach(function (b) {
+            var currentDate = new Date();
+            var currentHour = currentDate.getHours();
+            var currentMinute = currentDate.getMinutes();
+            
+            var d = b.Timestamp;
+            d = d.split(' ');
+            var time = d[1].split(":");
+            var measureDate = new Date(Number(d[0]), Number(d[1]), Number(d[2]), Number(time[0]), Number(time[1]), Number(time[2]));
+
+            //5 minutes = 300 000 milliseconds
+            if (((currentDate.getTime() - measureDate.getTime()) * -1) < 300000) {
+                bList.push(b);
+            }
+        })
+
+
+        var temp = bList.map(function (s) {
+           
+                return L.marker([s.Latitude, s.Longitude]).bindPopup("<b>" + s.BusId + "</b><br>" + s.BusName);
+         
         });
 
 
@@ -406,25 +434,20 @@
 
 
 
-        //function onMapClick(e) {
-            //alert("You clicked the map at " + e.latlng);
-        //}
+        /*function onMapClick(e) {
+            alert("You clicked the map at " + e.latlng);
+        }
 
-        //mymap.on('click', onMapClick);
+        mymap.on('click', onMapClick);*/
 
 
 
         var busSelect = document.getElementById("buses");
-        for (var i = 0; i < busList.length; i++) {
+        for (var i = 0; i < busInfoList.length; i++) {
             busSelect.innerHTML = busSelect.innerHTML +
-                '<option value="' + busList[i].BusId + '">' + busList[i].BusId + '</option>\n';
+                '<option value="' + busInfoList[i].BusId + '">' + busInfoList[i].BusId + '</option>\n';
         }
 
-        //var stationSelect = document.getElementById("busStations");
-        //for (var i = 0; i < stationList.length; i++) {
-        //    stationSelect.innerHTML = stationSelect.innerHTML +
-        //        '<option value="' + stationList[i].StationID + '">' + stationList[i].StationName + '</option>';
-        //}
         //Start station ids
         var startStationIds = [];
         timetable.forEach((time) => {
@@ -454,22 +477,16 @@
             });
 
             var stationSelect = document.getElementById("busStations");
+            stationSelect.innerHTML = '<option value="" disabled selected> Select a station </option>';
             var busOptions = stationSelect.innerHTML.trim().split('\n');
             for (var i = 0; i < stations.length; i++) {
                 stationSelect.innerHTML = stationSelect.innerHTML +
                     '<option value="' + stations[i].stationId + '">' + stations[i].stationName + '</option>';
             }
-            
-            
-            var busOptions = document.getElementById("buses");
-            if (busOptions.innerHTML.includes("select") || busOptions.innerHTML.includes("Select")) {
-                var options = busOptions.innerHTML.trim().split('\n');
-                options.shift();
-                busOptions.innerHTML = options.join();
-            }
-        }
 
-        function showTimes() {
+        }
+        //show timetable for selected bus --- add to stationSelect onchange
+        function showAllTimes() {
             var busId = document.getElementById("buses").value;
             var date = new Date().toString().split(' ');
             var day = date[0];
@@ -502,9 +519,36 @@
             console.log(timesForDays);
         }
 
-
-
-
+        //Acccess server to get time data for a station
+        function showTime(e) {
+            $.ajax({
+                type: "GET",
+                url: "http://193.226.0.198:5210/WCFService/Service1/web/GetTimeList?StationID=" + e.value,
+                crossDomain: true,
+                dataType: "jsonp",
+                success: function (data) {
+                    if (data.length > 0) {
+                        data.forEach((item) => {
+                            var bus = document.getElementById("buses").value;
+                            if (bus == item.busID) {
+                                var times = document.getElementById("timetable");
+                                times.innerHTML = "Bus arrives in: ";
+                                times.innerHTML += item.TheTimeString;
+                                console.log(data);
+                            }
+                        })
+                    } else {
+                        var times = document.getElementById("timetable");
+                        times.innerHTML = "Bus arrives in: ";
+                        times.innerHTML += "No data";
+                    }
+                },
+                error: function (request, error) {
+                    console.log(request, error);
+                }
+            });
+        }
+        
 
     </script>
 

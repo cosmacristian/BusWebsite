@@ -152,3 +152,6 @@ body, html {
     height: 100%;
 }
 
+.selectedRow{
+    background-color: aqua;
+}

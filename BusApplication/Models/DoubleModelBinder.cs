@@ -25,10 +25,10 @@ namespace BusApplication.Models
                                .GetValue(bindingContext.ModelName)
                                .ConvertTo(typeof(string)) as string;
 
-            //double result = 0;
-            //double.TryParse(value, NumberStyles.Any, culture, out result);
+            double result = 0;
+            double.TryParse(value, NumberStyles.Any, culture, out result);
 
-            return value;
+            return result;
         }
 
         /// <summary>
@@ -46,3 +46,4 @@ namespace BusApplication.Models
         }
     }
 }
+
