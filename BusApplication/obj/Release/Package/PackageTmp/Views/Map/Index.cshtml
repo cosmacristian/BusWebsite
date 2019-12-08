@@ -14,17 +14,35 @@
             float: left;
         }
 
-            .box select {
-                background-color: #0563af;
-                color: white;
-                padding: 14px;
-                border: none;
-                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-                -webkit-appearance: button;
-                outline: none;
+        #sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            #sortable li {
+                margin: 0 3px 3px 3px;
+                padding: 0.4em;
+                padding-left: 1.5em;
+                font-size: 1.4em;
             }
 
-            /*.box::before {
+                #sortable li span {
+                    position: absolute;
+                    margin-left: -1.3em;
+                }
+
+        .box select {
+            background-color: #0563af;
+            color: white;
+            padding: 14px;
+            border: none;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: button;
+            outline: none;
+        }
+
+        /*.box::before {
                 content: "\f107";
                 position: absolute;
                 top: 0;
@@ -39,14 +57,14 @@
                 pointer-events: none;
             }
                 */
-            .box:hover::before {
-                color: rgba(255, 255, 255, 0.6);
-                background-color: rgba(255, 255, 255, 0.2);
-            }
+        .box:hover::before {
+            color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
 
-            .box select option {
-                padding: 30px;
-            }
+        .box select option {
+            padding: 30px;
+        }
 
         #mapid {
             height: 600px;
@@ -133,78 +151,77 @@
                     @for (int i = 0; i < Model.Stations.Count(); i++)
                     {
 
-                    <div class="row">
-                        <input type="hidden" name="Stations[@i].StationID" value="@Model.Stations.ElementAt(i).StationID" />
-                        <div class="form-group col-lg-4">
-                            <label>StationName</label>
-                            <input name="Stations[@i].StationName" value="@Model.Stations.ElementAt(i).StationName" class="form-control" />
+                        <div class="row">
+                            <input type="hidden" name="Stations[@i].StationID" value="@Model.Stations.ElementAt(i).StationID" />
+                            <div class="form-group col-lg-4">
+                                <label>StationName</label>
+                                <input name="Stations[@i].StationName" value="@Model.Stations.ElementAt(i).StationName" class="form-control" />
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Longitude</label>
+                                @*    @Html.EditorFor(model => model.Stations[i].Longitude, new { htmlAttributes = new { @class = "form-control" } })*@
+                                <input name="Stations[@i].Longitude" type="number" step="0.0000001" value="@Model.Stations.ElementAt(i).Longitude" readonly class="form-control" />
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Latitude</label>
+                                @*  @Html.EditorFor(model => model.Stations[i].Latitude, new { htmlAttributes = new { @class = "form-control" } })*@
+                                <input name="Stations[@i].Latitude" type="number" step="0.0000001" value="@Model.Stations.ElementAt(i).Latitude" readonly class="form-control" />
+                            </div>
                         </div>
-                        <div class="form-group col-lg-4">
-                            <label>Longitude</label>
-                            @*    @Html.EditorFor(model => model.Stations[i].Longitude, new { htmlAttributes = new { @class = "form-control" } })*@
-                            <input name="Stations[@i].Longitude" type="number" step="0.0000001" value="@Model.Stations.ElementAt(i).Longitude" readonly class="form-control" />
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label>Latitude</label>
-                            @*  @Html.EditorFor(model => model.Stations[i].Latitude, new { htmlAttributes = new { @class = "form-control" } })*@
-                            <input name="Stations[@i].Latitude" type="number" step="0.0000001" value="@Model.Stations.ElementAt(i).Latitude" readonly class="form-control" />
-                        </div>
-                    </div>
                     }
 
-                </div>@*
-                <div id="lineEditor">
-                @for (int i = 0; i < Model.Stations.Count; i++)
-                {
-                    <div class="form-group col-lg-4">
-                        <label>@Model.Stations.ElementAt(i).StationName</label>
-                        <label asp-for="@Model.Stations.ElementAt(i).StationName" class="control-label"></label>
-                        <input asp-for="@Model.Stations.ElementAt(i).StationName" class="form-control" />
-                        <span asp-validation-for="@Model.Stations.ElementAt(i).StationName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-lg-4">
-                        <label>@Model.Stations.ElementAt(i).Latitude</label>
-                        <label asp-for="@Model.Stations.ElementAt(i).Latitude" class="control-label"></label>
-                        <input asp-for="@Model.Stations.ElementAt(i).Latitude" class="form-control" />
-                        <span asp-validation-for="@Model.Stations.ElementAt(i).Latitude" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-lg-4">
-                        <label>@Model.Stations.ElementAt(i).Longitude</label>
-                        <label asp-for="@Model.Stations.ElementAt(i).Longitude" class="control-label"></label>
-                        <input asp-for="@Model.Stations.ElementAt(i).Longitude" class="form-control" />
-                        <span asp-validation-for="@Model.Stations.ElementAt(i).Longitude" class="text-danger"></span>
-                    </div>
-                }
-            </div>
-                            <div id="traceEditor" class="hidden" style="overflow-y: scroll;height: 90vh;">
-                                @for (int i = 0; i < Model.Traces.Count; i++)
-                                {
-                                    <div class="hidden row">
-                                        <input type="hidden" name="Traces[@i].Id" value="@Model.Traces.ElementAt(i).Id" />
-                                        <input type="hidden" name="Traces[@i].Timestamp" value="@Model.Traces.ElementAt(i).Timestamp" />
-                                        <div class="form-group col-lg-4">
-                                            <label>BusId</label>
-                                            <input name="Traces[@i].BusId" value="@Model.Traces.ElementAt(i).BusId" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-lg-4">
-                                            <label>Latitude</label>
-                                            <input name="Traces[@i].Latitude" value="@Model.Traces.ElementAt(i).Latitude" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-lg-4">
-                                            <label>Longitude</label>
-                                            <input name="Traces[@i].Longitude" value="@Model.Traces.ElementAt(i).Longitude" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-lg-4">
-                                            <label>Longitude</label>
-                                            <input name="Traces[@i].OrderNum" value="@Model.Traces.ElementAt(i).OrderNum" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-lg-4">
-                                            <label>Longitude</label>
-                                            <input name="Traces[@i].EndPoint" value="@Model.Traces.ElementAt(i).EndPoint" class="form-control" />
-                                        </div>
+                </div>
+                @*    <div id="lineEditor">
+                        @for (int i = 0; i < Model.Stations.Count; i++)
+                        {
+                            <div class="form-group col-lg-4">
+                                <label>@Model.Stations.ElementAt(i).StationName</label>
+                                <label asp-for="@Model.Stations.ElementAt(i).StationName" class="control-label"></label>
+                                <input asp-for="@Model.Stations.ElementAt(i).StationName" class="form-control" />
+                                <span asp-validation-for="@Model.Stations.ElementAt(i).StationName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>@Model.Stations.ElementAt(i).Latitude</label>
+                                <label asp-for="@Model.Stations.ElementAt(i).Latitude" class="control-label"></label>
+                                <input asp-for="@Model.Stations.ElementAt(i).Latitude" class="form-control" />
+                                <span asp-validation-for="@Model.Stations.ElementAt(i).Latitude" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>@Model.Stations.ElementAt(i).Longitude</label>
+                                <label asp-for="@Model.Stations.ElementAt(i).Longitude" class="control-label"></label>
+                                <input asp-for="@Model.Stations.ElementAt(i).Longitude" class="form-control" />
+                                <span asp-validation-for="@Model.Stations.ElementAt(i).Longitude" class="text-danger"></span>
+                            </div>
+                        }
+                    </div>*@
+                <div id="traceEditor" class="hidden" style="overflow-y: scroll;height: 90vh;">
+                    <ul id="sortable">
+                        @for (int i = 0; i < Model.Traces.Count; i++)
+                        {
+                            <li class="ui-state-default hidden">
+                                <div class="row">
+                                    <label>@Model.Traces.ElementAt(i).Id</label>
+                                    <input type="hidden" name="Traces[@i].Id" value="@Model.Traces.ElementAt(i).Id" />
+                                    <input type="hidden" name="Traces[@i].Timestamp" value="@Model.Traces.ElementAt(i).Timestamp" />
+                                    <input type="hidden" name="Traces[@i].BusId" value="@Model.Traces.ElementAt(i).BusId" class="form-control" />
+                                    <input hidden name="Traces[@i].OrderNum" type="number" min="0" value=@i class="form-control" /> @*Model.Traces.ElementAt(i).OrderNum*@
+                                    <div class="form-group col-lg-4">
+                                        <label>Longitude</label>
+                                        <input name="Traces[@i].Longitude" type="number" step="0.0000001" value="@Model.Traces.ElementAt(i).Longitude" readonly class="form-control" />
                                     </div>
-                                }
-                            </div>*@
+                                    <div class="form-group col-lg-4">
+                                        <label>Latitude</label>
+                                        <input name="Traces[@i].Latitude" type="number" step="0.0000001" value="@Model.Traces.ElementAt(i).Latitude" readonly class="form-control" />
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label>Is Endpoint</label>
+                                        <input name="Traces[@i].EndPoint" type="checkbox" value="@Model.Traces.ElementAt(i).EndPoint" class="form-control" />
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
             }
         </div>
         <div class="col-lg-8" style="height: 90vh;">
@@ -214,7 +231,6 @@
             <ul class="lista">
 
 
-                <!--<li id="elem"><a id="Bus" href="#">Bus</a></li>-->
                 <li id="elem"><a id="stations" href="#">Stations</a></li>
                 <li id="elem"><a id="lines" href="#">Lines</a></li>
                 <li id="elem">
@@ -230,30 +246,56 @@
                 </li>
             </ul>
 
-
-
-
-            @* Slidebar *@
-
-
-
             <div id="mapid" style="height: 90vh;"></div>
 
 
 
-            <script>
 
-                function Generator() { };
 
-                Generator.prototype.rand = Math.floor(Math.random() * 26) + Date.now();
+        </div>
+    </div>
+    @section scripts
+{
+    <script>
+        var greenIcon = new L.Icon({
+            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
 
-                Generator.prototype.getId = function () {
-                    return this.rand++;
-                };
-                var idGen = new Generator();
+        var selectedStationID = "";
+        var selectedPointID = "";
+        var stationName = "";
+        var selectedid = "";
+            var selectedLinePoints;
+
+
+        function Generator() { };
+
+        Generator.prototype.rand = Math.floor(Math.random() * 26) + Date.now();
+
+        Generator.prototype.getId = function () {
+            return this.rand++;
+        };
+        var idGen = new Generator();
+
         //Lekeri a jelenlegi helyzetet
-                function getLocation() {
-                    $("#stationEditor :input[name*='Name']").change(function (e) { sincroniseStationName(e);});
+        function getLocation() {
+            $("#sortable").sortable({
+                stop: function (event, ui) {
+                    //alert(event.target + "New position: " + ui.item.index());
+                    $(ui.item).find("input[name *= 'OrderNum']").val(ui.item.index());
+                    selectedPointID = $(ui.item).find("input[name *= 'Id']")[0].value;
+                    var pos = tracesList.findIndex(findPointById);
+                    tracesList[pos].OrderNum = ui.item.index();
+                    redrawPoints();
+                }
+            });
+            $("#sortable").disableSelection();
+            $("#stationEditor :input[name*='Name']").change(function (e) { sincroniseStationName(e);});
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
             } else {
@@ -265,6 +307,7 @@
             mypos = [position.coords.latitude, position.coords.longitude];
             markMyLocation();
         }
+
         //Megjeleniti a jelenlegi poziciot
         function markMyLocation() {
             marker = L.marker([46.523454, 24.598617]/*mypos*/).addTo(mymap);
@@ -274,24 +317,6 @@
 
 
         /////////////////////Events//////////////////////////////
-        //Hozzaadja vagy leveszi a Buslayert
-        /*var elm = document.getElementById("Bus");
-        elm.onclick=(function (event) {
-            event.preventDefault();
-            if (mymap.hasLayer(BusLayer)) {
-                $(this).removeClass('selected');
-                mymap.removeLayer(BusLayer);
-            } else {
-                $("#dropdown").addClass('hidden');
-                $("#lines").removeClass('selected');
-                if (mymap.hasLayer(LineLayer)) {
-                    mymap.removeLayer(LineLayer);
-                }
-                mymap.addLayer(BusLayer);
-                $(this).addClass('selected');
-            }
-        });*/
-        //Kezeli a StationLayert
         var elm = document.getElementById("stations");
         elm.onclick = (function (event) {
             event.preventDefault();
@@ -303,7 +328,10 @@
                 $("#dropdown").addClass('hidden');
                 $("#lines").removeClass('selected');
                 if (mymap.hasLayer(LineLayer)) {
+                    clearMap();
+                    $("#dropdown").each(function () { this.selectedIndex = 0 });
                     mymap.removeLayer(LineLayer);
+                    //mymap.removeLayer(LinePointsLayer);
                 }
                 mymap.addLayer(StationsLayer);
                 $(this).addClass('selected');
@@ -334,6 +362,7 @@
                 $("#traceEditor").addClass('hidden');
                 if (mymap.hasLayer(LineLayer)) {
                     mymap.removeLayer(LineLayer);
+                    //mymap.removeLayer(LinePointsLayer);
                 }
             }
         });
@@ -342,15 +371,21 @@
         elm.onchange = (function (event) {
             if (mymap.hasLayer(LineLayer)) {
                 mymap.removeLayer(LineLayer);
-                $("#traceEditor :div.visi").each(function (index) {
+                clearMap();
+                //mymap.removeLayer(LinePointsLayer);
+                $("#traceEditor .visi").each(function (index) {
                     $(this).addClass('hidden');
                     $(this).removeClass('visi');
                 });
             }
-            var selectedid = $(this).val();//off
+            selectedid = $(this).val();//off
             if (selectedid != '-1') {
+                tracesList.sort(compare);
                 var temp = tracesList.map(function (s) {
                     if (s.BusId == selectedid) { return [s.Latitude, s.Longitude] } else { return null };
+                });
+                selectedLinePoints = tracesList.filter(function (el) {
+                    return el.BusId == selectedid;
                 });
                 $("#traceEditor :input[value=" + selectedid + "]").each(function (index) {
                     $(this).parent().parent().removeClass('hidden');
@@ -360,23 +395,40 @@
                     return el != null;
                 });
                 if (temp.length != 0) {
+                    
                     var firstpolyline = new L.Polyline(temp, {
                         color: 'blue',
                         weight: 3,
                         opacity: 0.5,
                         smoothFactor: 1
                     });
-                    var actbus = tracesList.find(function (element) {
+                    /*var actbus = tracesList.find(function (element) {
                         return element.BusId == selectedid;
+                    });*/
+                    //var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
+                    var marked = selectedLinePoints.map(function (s) {
+                        return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ');
                     });
-                    var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
 
-                    LineLayer = L.layerGroup([firstpolyline, marked]);
+
+                    //LinePointsLayer = L.layerGroup(marked);
+                    LineLayer = L.layerGroup(marked);
+                    firstpolyline.addTo(mymap);
+                    //mymap.addLayer(LinePointsLayer);
                     mymap.addLayer(LineLayer);
                 }
             }
         });
 
+        function compare(a, b) {
+            if (a.OrderNum < b.OrderNum) {
+                return -1;
+            }
+            if (a.OrderNum > b.OrderNum) {
+                return 1;
+            }
+            return 0;
+        }
 
         //////////////////////////Adatok betoltese////////////////////////////
 
@@ -389,9 +441,9 @@
 
         //Eloallitja a traceslist adatokat
         var tracesList = [];
-        @foreach (var bus in Model.Traces)
+        @for (int i = 0; i < Model.Traces.Count; i++)
         {
-           @:tracesList.push({ "Id": "@bus.Id", "BusId": "@bus.BusId", "Longitude": parseFloat("@bus.Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Latitude".replace(',', '.'))});
+           @:tracesList.push({ "Id": "@Model.Traces.ElementAt(i).Id","OrderNum": "@i" , "BusId": "@Model.Traces.ElementAt(i).BusId", "Longitude": parseFloat("@Model.Traces.ElementAt(i).Longitude".replace(',', '.')),"Latitude": parseFloat("@Model.Traces.ElementAt(i).Latitude".replace(',', '.'))});
         }
 
         //Eloallitja a stationoket
@@ -401,41 +453,31 @@
            @:stationList.push({ "StationName": "@st.StationName", "StationID": "@st.StationID", "Longitude": parseFloat("@st.Longitude".replace(',', '.')),"Latitude": parseFloat("@st.Latitude".replace(',', '.'))});
         }
 
-
+        //General info about buses.
         var busInfoList = [];
         @foreach (var bus in ViewBag.BusInfo)
         {
            @:busInfoList.push({ "BusName": "@bus.BusName", "BusId": "@bus.BusId" });@*, "Longitude": parseFloat("@bus.Actual_Longitude".replace(',', '.')),"Latitude": parseFloat("@bus.Actual_Latitude".replace(',', '.'))});*@
         }
         var LineLayer;
-
-                
-
-        var greenIcon = new L.Icon({
-            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-
-                var selectedStationID = "";
-                var stationName = "";
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //Hozzaadja a station nevet a popuphoz
         var temp = stationList.map(function (s) {
-            return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=stationName>' + s.StationName + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ' );
+            return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=stationid>' + s.StationID + '</a>'+'<br>'+'<a id=stationName>' + s.StationName + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ' );
         });
 
-            function btnMoveOnClick() {
+
+
+        ////////////////////////////////////////////////////STATION MOVE///////STATION DELETE///////////////////////////////
+        function btnMoveOnClick() {
             $("#stationEditor .selectedRow").each(function (index) {
                 $(this).addClass('visi');
                 $(this).removeClass('selectedRow');
             });
-            stationName = document.getElementById('stationName').innerHTML;
-            selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
-                $("#stationEditor :input[value=" + stationName + "]").parent().each(function (index) {
+            /*stationName*/selectedStationID = document.getElementById('stationid').innerHTML;
+            //selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
+            $("#stationEditor :input[value=" + selectedStationID + "]").each(function (index) {//stationName.split(" ")[0] + "]").parent().each(function (index) {
                 $(this).parent().addClass('selectedRow');
                 $(this).parent().removeClass('visi');
             });
@@ -446,10 +488,10 @@
                 $(this).addClass('visi');
                 $(this).removeClass('selectedRow');
             });
-            stationName = document.getElementById('stationName').innerHTML;
-            selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
+            /*stationName*/ selectedStationID = document.getElementById('stationid').innerHTML;
+            //selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
             $("#stationEditor :input[value=" + selectedStationID + "]").each(function (index) {
-                
+
                 $(this).parent().addClass('hidden');
                 $(this).parent().removeClass('visi');
                 $(this).parent().find("input[name *= 'Latitude']").val(0);
@@ -461,9 +503,10 @@
             selectedStationID = "";
         }
 
-        
+
+
+        ////////////////////////////// MAP ////////////////////////
         var StationsLayer = L.layerGroup(temp);
-        //////////////////////////////////////////////////////
         var mypos;
         //var marker;
         var mymap = L.map('mapid').setView([46.5, 24,39], 13);
@@ -476,10 +519,14 @@
 
         document.body.onload = getLocation;
 
-                function findStationById(station) {
-                    return station.StationID == selectedStationID;
-                }
+        function findStationById(station) {
+            return station.StationID == selectedStationID;
+        }
 
+        function findPointById(point) {
+            return point.Id == selectedPointID;
+        } 
+         /////////////////////////////////  INTERACTING WITH THE MAP  //////////////////////////
         function onMapClick(e) {
             if (selectedStationID == "add") {
                 var name = prompt("Please enter station name:");
@@ -499,7 +546,7 @@
                     iDiv.appendChild(inputId);
 
                     // Create the inner div before appending to the body
-                    var innerDivName = document.createElement('div');
+                    var innerDivName = document.createElement('div');                          ///CREATE NEW STATION
                     innerDivName.className = 'form-group col-lg-4';
                     var labelName = document.createElement('label');
                     labelName.innerHTML = 'StationName';//.setAttribute('for', 'StationName')
@@ -549,16 +596,16 @@
                 redrawStations();
                 selectedStationID = "";
                 }
-                
+
             }
             if (selectedStationID != "") {
                 $("#stationEditor .selectedRow").each(function (index) {
                     $(this).addClass('visi');
                     $(this).removeClass('selectedRow');
                 });
-                $("#stationEditor :input[value=" + stationName + "]").parent().parent().find("input[name*='Longitude']").val(e.latlng.lng);
-                $("#stationEditor :input[value=" + stationName + "]").parent().parent().find("input[name*='Latitude']").val(e.latlng.lat);
-                var pos = stationList.findIndex((station) => { return station.StationName == stationName });
+                $("#stationEditor :input[value=" + selectedStationID + "]").parent().find("input[name*='Longitude']").val(e.latlng.lng);   //MOVE THE STATION
+                $("#stationEditor :input[value=" + selectedStationID + "]").parent().find("input[name*='Latitude']").val(e.latlng.lat);
+                var pos = stationList.findIndex((station) => { return station.StationID == selectedStationID });
                 stationList[pos].Longitude = e.latlng.lng;
                 stationList[pos].Latitude = e.latlng.lat;
                 redrawStations();
@@ -569,43 +616,95 @@
 
         mymap.on('click', onMapClick);
 
-                function redrawStations() {
-                    if (mymap.hasLayer(StationsLayer)) {
-                        mymap.removeLayer(StationsLayer);
-                        temp = stationList.map(function (s) {
-                            return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=stationName>' + s.StationName + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ');
-                        });
-                        StationsLayer = L.layerGroup(temp);
-                        mymap.addLayer(StationsLayer);
 
-                    }
-                }
+        //REDRAW THE MAP AND STATIONS
+        function redrawStations() {
+            if (mymap.hasLayer(StationsLayer)) {
+                mymap.removeLayer(StationsLayer);
+                temp = stationList.map(function (s) {
+                    return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=stationid>' + s.StationID + '</a>' + '<br>' + '<a id=stationName>' + s.StationName + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ');
+                });
+                StationsLayer = L.layerGroup(temp);
+                mymap.addLayer(StationsLayer);
 
-                function sincroniseStationName(e) {
-                    if (e.type != "click") {
-                        var editedId = $(e.target).parent().parent().find('input[name *= "ID"]').val();
-                        var pos = stationList.findIndex((station) => { return station.StationID == editedId });
-                        stationList[pos].StationName = $(e.target).val();
-                        redrawStations();
-                        e.preventDefault();
-                    }
-                };
-/*
-        var busSelect = document.getElementById("buses");
-        for (var i = 0; i < busInfoList.length; i++) {
-            busSelect.innerHTML = busSelect.innerHTML +
-                '<option value="' + busInfoList[i].BusId + '">' + busInfoList[i].BusId + '</option>\n';
+            }
         }
-        */
-                function AddStation(e) {
-                    selectedStationID = "add";
-                    e.preventDefault();
-                    return false;
+
+        function redrawPoints() {
+            clearMap();
+            mymap.removeLayer(LineLayer);
+            tracesList.sort(compare);
+            var temp = tracesList.map(function (s) {
+                if (s.BusId == selectedid) { return [s.Latitude, s.Longitude] } else { return null };
+            });
+            selectedLinePoints = tracesList.filter(function (el) {
+                return el.BusId == selectedid;
+            });
+            $("#traceEditor :input[value=" + selectedid + "]").each(function (index) {
+                $(this).parent().parent().removeClass('hidden');
+                $(this).parent().parent().addClass('visi');
+            });
+            temp = temp.filter(function (el) {
+                return el != null;
+            });
+            if (temp.length != 0) {
+
+                var firstpolyline = new L.Polyline(temp, {
+                    color: 'blue',
+                    weight: 3,
+                    opacity: 0.5,
+                    smoothFactor: 1
+                });
+                /*var actbus = tracesList.find(function (element) {
+                    return element.BusId == selectedid;
+                });*/
+                //var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
+                var marked = selectedLinePoints.map(function (s) {
+                    return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ');
+                });
+
+
+                //LinePointsLayer = L.layerGroup(marked);
+                LineLayer = L.layerGroup(marked);
+                firstpolyline.addTo(mymap);
+                //mymap.addLayer(LinePointsLayer);
+                mymap.addLayer(LineLayer);
+            }
+        }
+
+        //WHEN THE NAME CHANGES REFRESH THE MARKERS
+        function sincroniseStationName(e) {
+            if (e.type != "click") {
+                var editedId = $(e.target).parent().parent().find('input[name *= "ID"]').val();
+                var pos = stationList.findIndex((station) => { return station.StationID == editedId });
+                stationList[pos].StationName = $(e.target).val();
+                redrawStations();
+                e.preventDefault();
+            }
+        };
+
+
+        function clearMap() {
+            for (i in mymap._layers) {
+                if (mymap._layers[i]._path != undefined) {
+                    try {
+                        mymap.removeLayer(mymap._layers[i]);
+                    }
+                    catch (e) {
+                        console.log("problem with " + e + mymap._layers[i]);
+                    }
                 }
+            }
+        }
+        //////////////////////////////////////////////// AUXILIARZ MAY REMOVE IT LATER
+        function AddStation(e) {
+            selectedStationID = "add";
+            e.preventDefault();
+            return false;
+        }
+        /////////////////////////////////////////////////
 
-            </script>
-
-        </div>
-    </div>
-</body>
+    </script>
+        }
+    </body>
 </html>
