@@ -206,7 +206,8 @@
                                     <input type="hidden" name="Traces[@i].Id" value="@Model.Traces.ElementAt(i).Id" />
                                     <input type="hidden" name="Traces[@i].Timestamp" value="@Model.Traces.ElementAt(i).Timestamp" />
                                     <input type="hidden" name="Traces[@i].BusId" value="@Model.Traces.ElementAt(i).BusId" class="form-control" />
-                                    <input hidden name="Traces[@i].OrderNum" type="number" min="0" value=@Model.Traces.ElementAt(i).OrderNum class="form-control" /> @*Model.Traces.ElementAt(i).OrderNum*@
+                                    <input hidden name="Traces[@i].OrderNum" type="number" min="0" value="@Model.Traces.ElementAt(i).OrderNum" class="form-control" /> @*Model.Traces.ElementAt(i).OrderNum*@
+                                    <input hidden name="Traces[@i].EndPoint" value=@Model.Traces.ElementAt(i).EndPoint.ToString() class="form-control" />
                                     <div class="form-group col-lg-4">
                                         <label>Longitude</label>
                                         <input name="Traces[@i].Longitude" type="number" step="0.0000001" value="@Model.Traces.ElementAt(i).Longitude" readonly class="form-control" />
@@ -214,10 +215,6 @@
                                     <div class="form-group col-lg-4">
                                         <label>Latitude</label>
                                         <input name="Traces[@i].Latitude" type="number" step="0.0000001" value="@Model.Traces.ElementAt(i).Latitude" readonly class="form-control" />
-                                    </div>
-                                    <div class="form-group col-lg-2">
-                                        <label>Is Endpoint</label>
-                                        <input name="Traces[@i].EndPoint" type="checkbox" value="@Model.Traces.ElementAt(i).EndPoint" class="form-control" />
                                     </div>
                                 </div>
                             </li>
@@ -268,6 +265,15 @@
             shadowSize: [41, 41]
         });
 
+        var redIcon = new L.Icon({
+            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
         var selectedStationID = "";
         var selectedPointID = "";
         var stationName = "";
@@ -308,8 +314,9 @@
                         var busid = act.find(":input[name *= 'Id']")[1].value;
                         var long = act.find(":input[name *= 'Long']").val();
                         var lat = act.find(":input[name *= 'Lat']").val();
+                        var fix = act.find(":input[name *= 'EndPoint']").val();
                         if (lat != 0 && long != 0)
-                            tracesList.push({ "Id": id,"OrderNum": i , "BusId": busid, "Longitude": parseFloat(long.replace(',', '.')),"Latitude": parseFloat(lat.replace(',', '.'))});
+                            tracesList.push({ "Id": id,"isFix": fix,"OrderNum": i , "BusId": busid, "Longitude": parseFloat(long.replace(',', '.')),"Latitude": parseFloat(lat.replace(',', '.'))});
 
                         i += 1;
                     });
@@ -430,7 +437,13 @@
                     });*/
                     //var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
                     var marked = selectedLinePoints.map(function (s) {
-                        return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ' + '<button type=button onClick = btnInsertPointBefore() > Before</> ' + '<button type=button onClick = btnInsertPointAfter() > After</> ');
+                        if (s.isFix == "True") {
+                            return L.marker([s.Latitude, s.Longitude], { icon: redIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ' + '<button type=button onClick = btnInsertPointBefore() > Before</> ' + '<button type=button onClick = btnInsertPointAfter() > After</> ');
+
+                        } else {
+                            return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ' + '<button type=button onClick = btnInsertPointBefore() > Before</> ' + '<button type=button onClick = btnInsertPointAfter() > After</> ');
+
+                        }
                     });
 
 
@@ -466,7 +479,7 @@
         var tracesList = [];
         @for (int i = 0; i < Model.Traces.Count; i++)
         {
-           @:tracesList.push({ "Id": "@Model.Traces.ElementAt(i).Id","OrderNum": "@Model.Traces.ElementAt(i).OrderNum" , "BusId": "@Model.Traces.ElementAt(i).BusId", "Longitude": parseFloat("@Model.Traces.ElementAt(i).Longitude".replace(',', '.')),"Latitude": parseFloat("@Model.Traces.ElementAt(i).Latitude".replace(',', '.'))});
+           @:tracesList.push({ "Id": "@Model.Traces.ElementAt(i).Id","isFix": "@Model.Traces.ElementAt(i).EndPoint","OrderNum": "@Model.Traces.ElementAt(i).OrderNum" , "BusId": "@Model.Traces.ElementAt(i).BusId", "Longitude": parseFloat("@Model.Traces.ElementAt(i).Longitude".replace(',', '.')),"Latitude": parseFloat("@Model.Traces.ElementAt(i).Latitude".replace(',', '.'))});
         }
 
         //Eloallitja a stationoket
@@ -534,10 +547,20 @@
             });
             /*stationName*/selectedPointID = document.getElementById('Id').innerHTML;
             //selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
+            var isFixed;
             $("#traceEditor :input[name *= 'Id'][value=" + selectedPointID + "]").each(function (index) {//stationName.split(" ")[0] + "]").parent().each(function (index) {
                 $(this).parent().addClass('selectedRow');
                 $(this).parent().removeClass('visi');
+                isFixed = $(this).parent().find("input[name *= 'EndPoint']").val();
             });
+
+            if (isFixed == "True") {
+                selectedPointID = "";
+                $("#traceEditor .selectedRow").each(function (index) {
+                    $(this).addClass('visi');
+                    $(this).removeClass('selectedRow');
+                });
+            }
         }
 
         function btnDeleteOnClickPoint() {
@@ -547,16 +570,22 @@
             });
             selectedPointID = document.getElementById('Id').innerHTML;
             //selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
+            var isFixed;
             $("#traceEditor :input[name *= 'Id'][value=" + selectedPointID + "]").each(function (index) {
 
                 $(this).parent().parent().addClass('hidden');
                 $(this).parent().parent().removeClass('visi');
-                $(this).parent().find("input[name *= 'Latitude']").val(0);
-                $(this).parent().find("input[name *= 'Longitude']").val(0);
+                isFixed = $(this).parent().find("input[name *= 'EndPoint']").val();
+                if (isFixed != "True") {
+                    $(this).parent().find("input[name *= 'Latitude']").val(0);
+                    $(this).parent().find("input[name *= 'Longitude']").val(0);
+                }
             });
-            var pos = tracesList.findIndex(findPointById);
-            tracesList.splice(pos, 1);
-            redrawPoints();
+            if (isFixed != "True") {
+                var pos = tracesList.findIndex(findPointById);
+                tracesList.splice(pos, 1);
+                redrawPoints();
+            }
             selectedPointID = "";
         }
 
@@ -693,7 +722,7 @@
                 if (selectedid != '-1') {
                     var newid = idGen.getId()
                     var size = tracesList.length;
-                    tracesList.push({ "Id": newid, "OrderNum": size, "BusId": selectedid, "Longitude": e.latlng.lng, "Latitude": e.latlng.lat });
+                    tracesList.push({ "Id": newid, "isFix": "false", "OrderNum": size, "BusId": selectedid, "Longitude": e.latlng.lng, "Latitude": e.latlng.lat });
 
                     var li = document.createElement('li');
                     li.className = 'ui-state-default ui-sortable-handle visi';
@@ -729,6 +758,13 @@
                     inputorder.name = "Traces[" + size + "].OrderNum";
                     iDiv.appendChild(inputorder);
 
+                    var inputName = document.createElement('input');
+                    inputName.hidden = true;
+                    inputName.value = false;
+                    inputName.setAttribute('value', false);
+                    inputName.name = "Traces[" + size + "].EndPoint";
+                    iDiv.appendChild(inputName);
+
                     // Create the inner div before appending to the body
 
                     var innerDivLng = document.createElement('div');
@@ -757,19 +793,7 @@
                     innerDivLat.appendChild(labelLat);
                     innerDivLat.appendChild(inputLat);
 
-                    var innerDivName = document.createElement('div');                          ///CREATE NEW STATION
-                    innerDivName.className = 'form-group col-lg-2';
-                    var labelName = document.createElement('label');
-                    labelName.innerHTML = 'Is Endpoint';//.setAttribute('for', 'StationName')
-                    var inputName = document.createElement('input');
-                    inputName.value = false;
-                    inputName.setAttribute('value', false);
-                    inputName.type = "checkbox";
-                    inputName.className = 'form-control';
-                    inputName.name = "Traces[" + size + "].EndPoint";
-
-                    innerDivName.appendChild(labelName);
-                    innerDivName.appendChild(inputName);
+                    
 
                     // The variable iDiv is still good... Just append to it.
                     var labelid = document.createElement('label');
@@ -777,7 +801,6 @@
                     li.appendChild(labelid);
                     iDiv.appendChild(innerDivLng);
                     iDiv.appendChild(innerDivLat);
-                    iDiv.appendChild(innerDivName);
                     li.appendChild(iDiv);
 
                     // Then append the whole thing onto the body
@@ -796,8 +819,9 @@
                             var busid = act.find(":input[name *= 'Id']")[1].value;
                             var long = act.find(":input[name *= 'Long']").val();
                             var lat = act.find(":input[name *= 'Lat']").val();
+                            var fix = act.find(":input[name *= 'EndPoint']").val();
                             if(lat != 0 && long != 0)
-                                tracesList.push({ "Id": id, "OrderNum": i, "BusId": busid, "Longitude": parseFloat(long.replace(',', '.')), "Latitude": parseFloat(lat.replace(',', '.')) });
+                                tracesList.push({ "Id": id, "isFix": fix, "OrderNum": i, "BusId": busid, "Longitude": parseFloat(long.replace(',', '.')), "Latitude": parseFloat(lat.replace(',', '.')) });
 
                             i += 1;
                         });
@@ -815,8 +839,9 @@
                             var busid = act.find(":input[name *= 'Id']")[1].value;
                             var long = act.find(":input[name *= 'Long']").val();
                             var lat = act.find(":input[name *= 'Lat']").val();
+                            var fix = act.find(":input[name *= 'EndPoint']").val();
                             if (lat != 0 && long != 0)
-                                tracesList.push({ "Id": id, "OrderNum": i, "BusId": busid, "Longitude": parseFloat(long.replace(',', '.')), "Latitude": parseFloat(lat.replace(',', '.')) });
+                                tracesList.push({ "Id": id, "isFix": fix, "OrderNum": i, "BusId": busid, "Longitude": parseFloat(long.replace(',', '.')), "Latitude": parseFloat(lat.replace(',', '.')) });
 
                             i += 1;
                         });
@@ -888,7 +913,13 @@
                 });*/
                 //var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
                 var marked = selectedLinePoints.map(function (s) {
-                    return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ' + '<button type=button onClick = btnInsertPointBefore() > Before</> ' + '<button type=button onClick = btnInsertPointAfter() > After</> ');
+                    if (s.isFix == "True") {
+                        return L.marker([s.Latitude, s.Longitude], { icon: redIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ' + '<button type=button onClick = btnInsertPointBefore() > Before</> ' + '<button type=button onClick = btnInsertPointAfter() > After</> ');
+
+                    } else {
+                        return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ' + '<button type=button onClick = btnInsertPointBefore() > Before</> ' + '<button type=button onClick = btnInsertPointAfter() > After</> ');
+
+                    }
                 });
 
 

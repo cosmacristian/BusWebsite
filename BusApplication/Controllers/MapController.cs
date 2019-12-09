@@ -28,7 +28,14 @@ namespace BusApplication.Controllers
             model.Traces = _dbcontext.BusTrace.OrderBy(C => C.OrderNum).ToList();
             model.Stations = _dbcontext.Station.ToList();
             model.Lines = _dbcontext.Line.ToList();
-            int maxId = model.Traces.Max(a => a.Id);
+            int maxId;
+            if (model.Traces.Count != 0) { 
+                maxId = model.Traces.Max(a => a.Id);
+            }
+            else
+            {
+                maxId = 1;
+            }
             foreach(Buses b in busList)
             {
                 int traceNum = model.Traces.Where(a => a.BusId == b.BusId).Count();
@@ -48,6 +55,7 @@ namespace BusApplication.Controllers
                             trace.Id = maxId;
                             trace.Latitude = station.Latitude;
                             trace.Longitude = station.Longitude;
+                            trace.EndPoint = true;
                          //   trace.OrderNum = order;
                          //   order += 1;
                             model.Traces.Add(trace);
@@ -60,7 +68,7 @@ namespace BusApplication.Controllers
             foreach (BusTrace trace in model.Traces)
             {
                 trace.OrderNum = order;
-                //   order += 1;
+                order += 1;
             }
 
             return View(model);
@@ -127,8 +135,6 @@ namespace BusApplication.Controllers
                     {
                         if (entry.Longitude != 0 && entry.Latitude != 0)
                         {
-                            if (entry.EndPoint == false)
-                                entry.EndPoint = true;
 
                             entry.Timestamp = DateTime.Now;
                             _dbcontext.BusTrace.Add(entry);
