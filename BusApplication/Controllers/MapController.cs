@@ -12,7 +12,8 @@ namespace BusApplication.Controllers
         private readonly BusDBlatestEntities _dbcontext = new BusDBlatestEntities();
         public ActionResult Index()
         {
-            ViewBag.BusInfo = _dbcontext.Buses.ToList();
+            List<Buses> busList = _dbcontext.Buses.ToList();
+            ViewBag.BusInfo = busList;
             var temp = (from p in _dbcontext.BusPositions
                         select new
                         {
@@ -24,9 +25,43 @@ namespace BusApplication.Controllers
                             Timestamp = p.Timestamp
                         }).ToList();
             var model = new EditBusLineViewModel();
-            model.Traces = _dbcontext.BusTrace.ToList();
+            model.Traces = _dbcontext.BusTrace.OrderBy(C => C.OrderNum).ToList();
             model.Stations = _dbcontext.Station.ToList();
             model.Lines = _dbcontext.Line.ToList();
+            int maxId = model.Traces.Max(a => a.Id);
+            foreach(Buses b in busList)
+            {
+                int traceNum = model.Traces.Where(a => a.BusId == b.BusId).Count();
+                
+                if(traceNum == 0)
+                {
+                    var stations = model.Lines.Where(l => l.LineID == b.BusId).OrderBy(l=>l.StationNr).ToList();
+                    if(stations.Count != 0)
+                    {
+                        //int order = 0;
+                        foreach(Line st in stations)
+                        {
+                            maxId += 1;
+                            Station station = model.Stations.Find(s => s.StationID == st.StationID);
+                            BusTrace trace = new BusTrace();
+                            trace.BusId = b.BusId;
+                            trace.Id = maxId;
+                            trace.Latitude = station.Latitude;
+                            trace.Longitude = station.Longitude;
+                         //   trace.OrderNum = order;
+                         //   order += 1;
+                            model.Traces.Add(trace);
+                        }
+                    }
+                }
+
+            }
+            int order = 0;
+            foreach (BusTrace trace in model.Traces)
+            {
+                trace.OrderNum = order;
+                //   order += 1;
+            }
 
             return View(model);
         }
