@@ -562,6 +562,16 @@
 
 
         ////////////////////////////// MAP ////////////////////////
+        var elem = document.getElementById("mapid");
+        elem.onkeyup = function (e) {
+            if (e.keyCode == 13) {
+                if (!$("#stationEditor").hasClass('hidden'))
+                    AddStation(e);
+                if (!$("#traceEditor").hasClass('hidden'))
+                    AddPoint(e);
+            }
+        }
+
         var StationsLayer = L.layerGroup(temp);
         var mypos;
         //var marker;
@@ -676,7 +686,7 @@
                     tracesList.push({ "Id": newid, "OrderNum": size, "BusId": selectedid, "Longitude": e.latlng.lng, "Latitude": e.latlng.lat });
 
                     var li = document.createElement('li');
-                    li.className = 'ui-state-default ui-sortable-handle';
+                    li.className = 'ui-state-default ui-sortable-handle visi';
                     var iDiv = document.createElement('div');
                     iDiv.className = 'row';
 
@@ -808,10 +818,6 @@
             });
             selectedLinePoints = tracesList.filter(function (el) {
                 return el.BusId == selectedid;
-            });
-            $("#traceEditor :input[name *= 'BusId'][value=" + selectedid + "]").each(function (index) {
-                $(this).parent().parent().removeClass('hidden');
-                $(this).parent().parent().addClass('visi');
             });
             temp = temp.filter(function (el) {
                 return el != null;

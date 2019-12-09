@@ -37,43 +37,73 @@ namespace BusApplication.Controllers
             List<BusTrace> oldTraces = _dbcontext.BusTrace.ToList();
             List<Station> oldStations = _dbcontext.Station.ToList();
             List<Line> oldLines = _dbcontext.Line.ToList();
-                if(model.Lines != null)
-                {
+            if(model.Lines != null)
+            {
 
-                }
-                if (model.Stations != null)
+            }
+            if (model.Stations != null)
+            {
+                foreach(var entry in model.Stations)
                 {
-                    foreach(var entry in model.Stations)
+                    var res = oldStations.Where(x => x.StationID == entry.StationID).FirstOrDefault();
+                    if(res != null)
                     {
-                        var res = oldStations.Where(x => x.StationID == entry.StationID).FirstOrDefault();
-                        if(res != null)
-                        {
-                            if(entry.Longitude !=0 && entry.Latitude != 0) { 
-                                res.StationName = entry.StationName;
-                                res.Longitude = entry.Longitude;
-                                res.Latitude = entry.Latitude;
-                            }
-                            else
-                            {
-                                _dbcontext.Station.Remove(res);
-                            }
+                        if(entry.Longitude !=0 && entry.Latitude != 0) { 
+                            res.StationName = entry.StationName;
+                            res.Longitude = entry.Longitude;
+                            res.Latitude = entry.Latitude;
                         }
                         else
                         {
-                            if (entry.Longitude != 0 && entry.Latitude != 0)
-                            {
-                                _dbcontext.Station.Add(entry);
-                            }
-                            
+                            _dbcontext.Station.Remove(res);
                         }
                     }
+                    else
+                    {
+                        if (entry.Longitude != 0 && entry.Latitude != 0)
+                        {
+                            _dbcontext.Station.Add(entry);
+                        }
+                            
+                    }
                 }
-                if (model.Traces != null)
+            }
+            if (model.Traces != null)
+            {
+                foreach (var entry in model.Traces)
                 {
+                    var res = oldTraces.Where(x => x.Id == entry.Id).FirstOrDefault();
+                    if (res != null)
+                    {
+                        if (entry.Longitude != 0 && entry.Latitude != 0)
+                        {
+                            res.OrderNum = entry.OrderNum;
+                            res.EndPoint = entry.EndPoint;
+                            res.Timestamp = DateTime.Now;
+                            res.Longitude = entry.Longitude;
+                            res.Latitude = entry.Latitude;
+                        }
+                        else
+                        {
+                            _dbcontext.BusTrace.Remove(res);
+                        }
+                    }
+                    else
+                    {
+                        if (entry.Longitude != 0 && entry.Latitude != 0)
+                        {
+                            if (entry.EndPoint == false)
+                                entry.EndPoint = true;
 
+                            entry.Timestamp = DateTime.Now;
+                            _dbcontext.BusTrace.Add(entry);
+                        }
+
+                    }
                 }
-                _dbcontext.SaveChanges();
-                return RedirectToAction("Index");
+            }
+            _dbcontext.SaveChanges();
+            return RedirectToAction("Index");
         }
         
     }

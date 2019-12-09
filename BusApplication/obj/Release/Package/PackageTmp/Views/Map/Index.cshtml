@@ -195,12 +195,14 @@
                         }
                     </div>*@
                 <div id="traceEditor" class="hidden" style="overflow-y: scroll;height: 90vh;">
+                    <button onclick="AddPoint(event)">Add Point</button>
                     <ul id="sortable">
                         @for (int i = 0; i < Model.Traces.Count; i++)
                         {
                             <li class="ui-state-default hidden">
+                                <label>@Model.Traces.ElementAt(i).Id</label>
                                 <div class="row">
-                                    <label>@Model.Traces.ElementAt(i).Id</label>
+                                    
                                     <input type="hidden" name="Traces[@i].Id" value="@Model.Traces.ElementAt(i).Id" />
                                     <input type="hidden" name="Traces[@i].Timestamp" value="@Model.Traces.ElementAt(i).Timestamp" />
                                     <input type="hidden" name="Traces[@i].BusId" value="@Model.Traces.ElementAt(i).BusId" class="form-control" />
@@ -213,7 +215,7 @@
                                         <label>Latitude</label>
                                         <input name="Traces[@i].Latitude" type="number" step="0.0000001" value="@Model.Traces.ElementAt(i).Latitude" readonly class="form-control" />
                                     </div>
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-2">
                                         <label>Is Endpoint</label>
                                         <input name="Traces[@i].EndPoint" type="checkbox" value="@Model.Traces.ElementAt(i).EndPoint" class="form-control" />
                                     </div>
@@ -283,14 +285,34 @@
         var idGen = new Generator();
 
         //Lekeri a jelenlegi helyzetet
+        /*var pos = tracesList.findIndex(findPointById);
+                    tracesList.splice(ui.item.index(), 0, tracesList[pos]);
+                    tracesList.splice(pos, 1);i = 0;
+                    tracesList.forEach(function (point) {
+                        point.OrderNum = i;
+                        i += 1;
+                    });
+        */
         function getLocation() {
             $("#sortable").sortable({
                 stop: function (event, ui) {
                     //alert(event.target + "New position: " + ui.item.index());
                     $(ui.item).find("input[name *= 'OrderNum']").val(ui.item.index());
                     selectedPointID = $(ui.item).find("input[name *= 'Id']")[0].value;
-                    var pos = tracesList.findIndex(findPointById);
-                    tracesList[pos].OrderNum = ui.item.index();
+                    tracesList = [];
+                    var i = 0;
+                    $("#traceEditor :input[name *= 'OrderNum']").each(function (o) {
+                        $(this).val(i);
+                        var act = $(this).parent();
+                        var id = act.find(":input[name *= 'Id']")[0].value;
+                        var busid = act.find(":input[name *= 'Id']")[1].value;
+                        var long = act.find(":input[name *= 'Long']").val();
+                        var lat = act.find(":input[name *= 'Lat']").val();
+                        tracesList.push({ "Id": id,"OrderNum": i , "BusId": busid, "Longitude": parseFloat(long.replace(',', '.')),"Latitude": parseFloat(lat.replace(',', '.'))});
+
+                        i += 1;
+                    });
+                    
                     redrawPoints();
                 }
             });
@@ -387,7 +409,7 @@
                 selectedLinePoints = tracesList.filter(function (el) {
                     return el.BusId == selectedid;
                 });
-                $("#traceEditor :input[value=" + selectedid + "]").each(function (index) {
+                $("#traceEditor :input[name *= 'BusId'][value=" + selectedid + "]").each(function (index) {
                     $(this).parent().parent().removeClass('hidden');
                     $(this).parent().parent().addClass('visi');
                 });
@@ -407,7 +429,7 @@
                     });*/
                     //var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
                     var marked = selectedLinePoints.map(function (s) {
-                        return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ');
+                        return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ');
                     });
 
 
@@ -503,9 +525,53 @@
             selectedStationID = "";
         }
 
+        ///////////////////////////////
+        function btnMoveOnClickPoint() {
+            $("#traceEditor .selectedRow").each(function (index) {
+                $(this).addClass('visi');
+                $(this).removeClass('selectedRow');
+            });
+            /*stationName*/selectedPointID = document.getElementById('Id').innerHTML;
+            //selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
+            $("#traceEditor :input[name *= 'Id'][value=" + selectedPointID + "]").each(function (index) {//stationName.split(" ")[0] + "]").parent().each(function (index) {
+                $(this).parent().addClass('selectedRow');
+                $(this).parent().removeClass('visi');
+            });
+        }
+
+        function btnDeleteOnClickPoint() {
+            $("#traceEditor .selectedRow").each(function (index) {
+                $(this).addClass('visi');
+                $(this).removeClass('selectedRow');
+            });
+            selectedPointID = document.getElementById('Id').innerHTML;
+            //selectedStationID = stationList.find(a => a.StationName == stationName).StationID;//selectedRow ===++++
+            $("#traceEditor :input[name *= 'Id'][value=" + selectedPointID + "]").each(function (index) {
+
+                $(this).parent().parent().addClass('hidden');
+                $(this).parent().parent().removeClass('visi');
+                $(this).parent().find("input[name *= 'Latitude']").val(0);
+                $(this).parent().find("input[name *= 'Longitude']").val(0);
+            });
+            var pos = tracesList.findIndex(findPointById);
+            tracesList.splice(pos, 1);
+            redrawPoints();
+            selectedPointID = "";
+        }
+
 
 
         ////////////////////////////// MAP ////////////////////////
+        var elem = document.getElementById("mapid");
+        elem.onkeyup = function (e) {
+            if (e.keyCode == 13) {
+                if (!$("#stationEditor").hasClass('hidden'))
+                    AddStation(e);
+                if (!$("#traceEditor").hasClass('hidden'))
+                    AddPoint(e);
+            }
+        }
+
         var StationsLayer = L.layerGroup(temp);
         var mypos;
         //var marker;
@@ -611,7 +677,118 @@
                 redrawStations();
                 selectedStationID = "";
             }
+            ////////////////////////////////////////////////
             //alert("You clicked the map at " + e.latlng);
+            if (selectedPointID == "add") {
+                if (selectedid != '-1') {
+                    var newid = idGen.getId()
+                    var size = tracesList.length;
+                    tracesList.push({ "Id": newid, "OrderNum": size, "BusId": selectedid, "Longitude": e.latlng.lng, "Latitude": e.latlng.lat });
+
+                    var li = document.createElement('li');
+                    li.className = 'ui-state-default ui-sortable-handle visi';
+                    var iDiv = document.createElement('div');
+                    iDiv.className = 'row';
+
+                    var inputId = document.createElement('input');
+                    inputId.hidden = true;
+                    //inputId.value = newid;
+                    inputId.setAttribute('value', newid);
+                    inputId.name = "Traces[" + size + "].Id";
+                    iDiv.appendChild(inputId);
+
+                    var inputtime = document.createElement('input');
+                    inputtime.hidden = true;
+                    //inputId.value = newid;
+                    inputtime.setAttribute('value', "");
+                    inputtime.name = "Traces[" + size + "].Timestamp";
+                    iDiv.appendChild(inputtime);
+
+                    var inputBusId = document.createElement('input');
+                    inputBusId.hidden = true;
+                    //inputId.value = newid;
+                    inputBusId.setAttribute('value', selectedid);
+                    inputBusId.name = "Traces[" + size + "].BusId";
+                    iDiv.appendChild(inputBusId);
+
+                    var inputorder = document.createElement('input');
+                    inputorder.hidden = true;
+                    inputorder.type = "number";
+                    //inputId.value = newid;
+                    inputorder.setAttribute('value', size);
+                    inputorder.name = "Traces[" + size + "].OrderNum";
+                    iDiv.appendChild(inputorder);
+
+                    // Create the inner div before appending to the body
+
+                    var innerDivLng = document.createElement('div');
+                    innerDivLng.className = 'form-group col-lg-4';
+                    var labelLng = document.createElement('label');
+                    labelLng.innerHTML = 'Longitude';//.setAttribute('for', 'Longitude')
+                    var inputLng = document.createElement('input');
+                    inputLng.value = e.latlng.lng;
+                    inputLng.setAttribute('value', e.latlng.lng);
+                    inputLng.className = 'form-control';
+                    inputLng.name = "Traces[" + size + "].Longitude";
+                    inputLng.readOnly = true;
+                    innerDivLng.appendChild(labelLng);
+                    innerDivLng.appendChild(inputLng);
+
+                    var innerDivLat = document.createElement('div');                   //form-control
+                    innerDivLat.className = 'form-group col-lg-4';
+                    var labelLat = document.createElement('label');
+                    labelLat.innerHTML = 'Latitude';//.setAttribute('for', 'Latitude')
+                    var inputLat = document.createElement('input');
+                    inputLat.value = e.latlng.lat;
+                    inputLat.setAttribute('value', e.latlng.lat);
+                    inputLat.className = 'form-control';
+                    inputLat.name = "Traces[" + size + "].Latitude";
+                    inputLat.readOnly = true;
+                    innerDivLat.appendChild(labelLat);
+                    innerDivLat.appendChild(inputLat);
+
+                    var innerDivName = document.createElement('div');                          ///CREATE NEW STATION
+                    innerDivName.className = 'form-group col-lg-2';
+                    var labelName = document.createElement('label');
+                    labelName.innerHTML = 'Is Endpoint';//.setAttribute('for', 'StationName')
+                    var inputName = document.createElement('input');
+                    inputName.value = false;
+                    inputName.setAttribute('value', false);
+                    inputName.type = "checkbox";
+                    inputName.className = 'form-control';
+                    inputName.name = "Traces[" + size + "].EndPoint";
+
+                    innerDivName.appendChild(labelName);
+                    innerDivName.appendChild(inputName);
+
+                    // The variable iDiv is still good... Just append to it.
+                    var labelid = document.createElement('label');
+                    labelid.innerHTML = newid;
+                    li.appendChild(labelid);
+                    iDiv.appendChild(innerDivLng);
+                    iDiv.appendChild(innerDivLat);
+                    iDiv.appendChild(innerDivName);
+                    li.appendChild(iDiv);
+
+                    // Then append the whole thing onto the body
+                    document.getElementById('sortable').appendChild(li);
+                    redrawPoints();
+                    selectedPointID = "";
+                }
+            }
+            if (selectedPointID != "") {
+                $("#traceEditor .selectedRow").each(function (index) {
+                    $(this).addClass('visi');
+                    $(this).removeClass('selectedRow');
+                });
+                $("#traceEditor :input[name *= 'Id'][value=" + selectedPointID + "]").parent().find("input[name*='Longitude']").val(e.latlng.lng);   //MOVE THE STATION
+                $("#traceEditor :input[name *= 'Id'][value=" + selectedPointID + "]").parent().find("input[name*='Latitude']").val(e.latlng.lat);
+                var pos = tracesList.findIndex((tr) => { return tr.Id == selectedPointID });
+                tracesList[pos].Longitude = e.latlng.lng;
+                tracesList[pos].Latitude = e.latlng.lat;
+                redrawPoints();
+                selectedPointID = "";
+            }
         }
 
         mymap.on('click', onMapClick);
@@ -632,17 +809,15 @@
 
         function redrawPoints() {
             clearMap();
-            mymap.removeLayer(LineLayer);
+            if (mymap.hasLayer(LineLayer)) {
+                mymap.removeLayer(LineLayer);
+            }
             tracesList.sort(compare);
             var temp = tracesList.map(function (s) {
                 if (s.BusId == selectedid) { return [s.Latitude, s.Longitude] } else { return null };
             });
             selectedLinePoints = tracesList.filter(function (el) {
                 return el.BusId == selectedid;
-            });
-            $("#traceEditor :input[value=" + selectedid + "]").each(function (index) {
-                $(this).parent().parent().removeClass('hidden');
-                $(this).parent().parent().addClass('visi');
             });
             temp = temp.filter(function (el) {
                 return el != null;
@@ -660,7 +835,7 @@
                 });*/
                 //var marked = L.marker([actbus.Latitude, actbus.Longitude]).bindPopup("<b>" + actbus.BusId + "</b><br>" + actbus.BusName);
                 var marked = selectedLinePoints.map(function (s) {
-                    return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClick() > Move</> ' + '<button type=button onClick = btnDeleteOnClick() > Delete</> ');
+                    return L.marker([s.Latitude, s.Longitude], { icon: greenIcon }).bindPopup('<a id=Id>' + s.Id + '</a>' + '<br>' + '<button type=button onClick = btnMoveOnClickPoint() > Move</> ' + '<button type=button onClick = btnDeleteOnClickPoint() > Delete</> ');
                 });
 
 
@@ -699,6 +874,12 @@
         //////////////////////////////////////////////// AUXILIARZ MAY REMOVE IT LATER
         function AddStation(e) {
             selectedStationID = "add";
+            e.preventDefault();
+            return false;
+        }
+
+        function AddPoint(e) {
+            selectedPointID = "add";
             e.preventDefault();
             return false;
         }
