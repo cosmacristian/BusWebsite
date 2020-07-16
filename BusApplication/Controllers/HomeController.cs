@@ -51,7 +51,7 @@ namespace BusApplication.Controllers
                 posList.Add(o);
             }
             ViewBag.Bus = posList;
-            ViewBag.BusTrace = _dbcontext.BusTrace.ToList();
+            ViewBag.BusTrace = _dbcontext.BusTrace.OrderBy(a=>a.OrderNum).ToList();
             ViewBag.Stations = _dbcontext.Station.ToList();
             ViewBag.Line = _dbcontext.Line.ToList();
             ViewBag.Timetable = _dbcontext.Timetable.ToList();
